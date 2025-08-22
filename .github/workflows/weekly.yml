@@ -1,0 +1,60 @@
+name: FMS Weekly Intent Brief
+
+on:
+  schedule:
+    - cron: "5 6 * * 1"   # Mondays 06:05 UTC (morning London)
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Cache HuggingFace
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: ${{ runner.os }}-hf-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-hf-
+
+      - name: Run pipeline
+        run: |
+          python -m src.main
+
+      - name: Build highlight blog
+        run: |
+          python -m src.report.make_blog_post
+
+      - name: Build longform blog (Top 5)
+        run: |
+          python -m src.report.make_longform_blog
+
+      - name: Commit outputs
+        run: |
+          git config user.name "gh-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add reports/*.md reports/*.csv reports/*.json data/history.json data/discovered_sources.yaml docs/_posts/*.md || true
+          git commit -m "Weekly report + blog posts" || echo "Nothing to commit"
+          git push
