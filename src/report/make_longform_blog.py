@@ -2,11 +2,12 @@ from pathlib import Path
 import re
 from sumy.summarizers.text_rank import TextRankSummarizer
 from sumy.parsers.plaintext import PlaintextParser
-from sumy.nltk_tokenize import tokenize as sumy_tokenize
+from sumy.nlp.tokenizers import Tokenizer   # ✅ correct tokenizer import
 from sumy.utils import get_stop_words
 
 def _summ(text, sents=4, lang="english"):
-    parser = PlaintextParser.from_string(text, sumy_tokenize.Tokenizer(lang))
+    # ✅ use Sumy's Tokenizer instead of the missing sumy.nltk_tokenize
+    parser = PlaintextParser.from_string(text, Tokenizer(lang))
     summ = TextRankSummarizer()
     summ.stop_words = get_stop_words(lang)
     return " ".join(str(s) for s in summ(parser.document, sents))
