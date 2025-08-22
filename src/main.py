@@ -28,6 +28,8 @@ def sumy_tokenize(text: str):
     parts = re.split(r'(?<=[.!?])\s+(?=[A-Z0-9"\'\(\[\{])', text)
     return [p.strip() for p in parts if p.strip()]
 
+import os, socket
+socket.setdefaulttimeout(int(os.getenv("HTTP_TIMEOUT", "20")))  # cap each network call at 20s
 
 
 ROOT = Path(__file__).resolve().parents[1]
