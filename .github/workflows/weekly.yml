@@ -39,9 +39,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-hf-
 
-      - name: Run pipeline
-        run: |
-          python -m src.main
+      - name: Run pipeline (retry + timeout)
+  uses: nick-fields/retry@v3
+  with:
+    timeout_minutes: 20
+    max_attempts: 2
+    command: python -u -m src.main
+
 
       #- name: Build highlight blog
        # run: |
