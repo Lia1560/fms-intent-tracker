@@ -14,10 +14,21 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer, util
 from sumy.summarizers.text_rank import TextRankSummarizer
 from sumy.parsers.plaintext import PlaintextParser
-from sumy.nltk_tokenize import tokenize as sumy_tokenize  # avoids heavy language downloads
+
 from sumy.utils import get_stop_words
 
 from dateutil import parser as dtparser, tz
+import re
+
+def sumy_tokenize(text: str):
+    """Lightweight sentence splitter to replace the missing sumy import."""
+    if not text:
+        return []
+    text = re.sub(r"\s+", " ", text.strip())
+    parts = re.split(r'(?<=[.!?])\s+(?=[A-Z0-9"\'\(\[\{])', text)
+    return [p.strip() for p in parts if p.strip()]
+
+
 
 ROOT = Path(__file__).resolve().parents[1]
 CFG = yaml.safe_load((ROOT / "config.yaml").read_text())
