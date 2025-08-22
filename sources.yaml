@@ -14,12 +14,12 @@ rss:
   - https://www.consilium.europa.eu/en/rss/pressreleases.ashx
 
   # Vendor & competitor YouTube channels (product/features, changelogs, demos, exec talks)
-  - https://www.youtube.com/feeds/videos.xml?channel_id=UCvxGFOnwUBDHHcxuPqhe4CQ  # Upwork (official)
-  - https://www.youtube.com/feeds/videos.xml?channel_id=UCQieDTrc3ZeCPPNoJEFbqaQ  # Fiverr (official)
-  - https://www.youtube.com/feeds/videos.xml?channel_id=UCPJsrP8zyttajAybEMQBNgA  # Remote (official)
-  - https://www.youtube.com/feeds/videos.xml?channel_id=UCNqm_euTHZz3o5OnKhUS-oA  # Toptal (official)
-  - https://www.youtube.com/feeds/videos.xml?channel_id=UCYiK-3h2CuggLuPk27myBkg  # YunoJuno (competitor)
-  - https://www.youtube.com/feeds/videos.xml?channel_id=UC-jjSXIt8b_nkBBf60B-xCg  # Deel (official)
+ # - https://www.youtube.com/feeds/videos.xml?channel_id=UCvxGFOnwUBDHHcxuPqhe4CQ  # Upwork (official)
+  #- https://www.youtube.com/feeds/videos.xml?channel_id=UCQieDTrc3ZeCPPNoJEFbqaQ  # Fiverr (official)
+ # - https://www.youtube.com/feeds/videos.xml?channel_id=UCPJsrP8zyttajAybEMQBNgA  # Remote (official)
+  #- https://www.youtube.com/feeds/videos.xml?channel_id=UCNqm_euTHZz3o5OnKhUS-oA  # Toptal (official)
+  #- https://www.youtube.com/feeds/videos.xml?channel_id=UCYiK-3h2CuggLuPk27myBkg  # YunoJuno (competitor)
+  #- https://www.youtube.com/feeds/videos.xml?channel_id=UC-jjSXIt8b_nkBBf60B-xCg  # Deel (official)
 
   # Vendor engineering blogs
   - https://tech.yunojuno.com/rss
@@ -205,6 +205,6 @@ domains:
 # Auto-discovery settings
 discovery:
   expand_from_kept_links: true
-  max_new_sources_per_week: 60
+  max_new_sources_per_week: 10
   require_rss: false
   min_weeks_to_promote: 2
