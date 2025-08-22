@@ -43,9 +43,9 @@ jobs:
         run: |
           python -m src.main
 
-      - name: Build highlight blog
-        run: |
-          python -m src.report.make_blog_post
+      #- name: Build highlight blog
+       # run: |
+        #  python -m src.report.make_blog_post
 
       - name: Build longform blog (Top 5)
         run: |
