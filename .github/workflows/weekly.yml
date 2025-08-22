@@ -2,7 +2,7 @@ name: FMS Weekly Intent Brief
 
 on:
   schedule:
-    - cron: "5 6 * * 1"   # Mondays 06:05 UTC (morning London)
+    - cron: "0 11 * * 1"   # Mondays 06:05 UTC (morning London)
   workflow_dispatch: {}
 
 jobs:
