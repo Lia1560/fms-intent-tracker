@@ -1,0 +1,50 @@
+timezone: Europe/London
+lookback_days: 7
+max_items_per_section: 10
+
+intent:
+  include: >
+    Track updates in the Freelancer Management Systems (FMS) space and the wider freelance economy:
+    Product & Feature Signals (launches, enhancements, rollouts for sourcing, onboarding, compliance,
+    contracting, execution, payments, budget, reporting, integrations, security);
+    Strategic Moves (partnerships, integrations, acquisitions, funding, expansions);
+    Market & Trend Signals (AI automation, compliance tooling, integrations, low/no-code, niche platforms,
+    freelancers as entrepreneurs, APAC growth);
+    Regulation & Risk (IR35, HMRC/IRS/EU directives, worker classification, indemnity);
+    Influencer/Analyst Commentary (e.g., Matt Mottola, Jon Younger, Barry Matthews, Josh Bersin, executives at Deel/Remote, SIA analysts).
+    Use intent/semantics, not just keywords.
+  exclude: >
+    Generic SMB/HR productivity tips without concrete FMS relevance; aviation 'flight management system'
+    content; consumer gig marketplaces unless enterprise/FMS-relevant; unrelated engineering/dev updates;
+    marketing fluff without a verifiable claim or source.
+
+categories:
+  - Product & Feature Signals
+  - Strategic Moves
+  - Market & Trend Signals
+  - Regulation & Risk
+  - Influencer & Analyst Commentary
+  - Discovery Highlights
+
+scoring:
+  keep_threshold: 0.30
+  weights:
+    Product & Feature Signals: 1.10
+    Strategic Moves: 1.15
+    Market & Trend Signals: 1.00
+    Regulation & Risk: 1.20
+    Influencer & Analyst Commentary: 0.95
+    Discovery Highlights: 0.80
+
+ranking:
+  big_vendor_domains: [ "upwork.com", "fiverr.com", "deel.com", "remote.com", "toptal.com", "accenture.com", "mckinsey.com" ]
+  funding_words: ["seed","series a","series b","series c","raises","funding","invests","acquires","merger","acquisition"]
+  contract_words: ["wins contract","awarded","framework","msa","tender","rfp","framework agreement"]
+  reg_words: ["ir35","hmrc","irs","directive","eu","compliance","worker classification","indemnity","platform work directive"]
+  launch_words: ["launches","announces","release notes","general availability","integration","changelog","update","rollout"]
+  top_k: 10
+
+trends:
+  window_weeks: 8
+  new_min_sources: 2
+  momentum_jump_pct: 60
