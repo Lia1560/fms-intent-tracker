@@ -1,0 +1,6 @@
+title: FMS Weekly Discoveries
+description: Intent-driven updates on the Freelancer Management Systems market and the freelance economy.
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
