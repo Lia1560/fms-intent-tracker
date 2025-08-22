@@ -1,0 +1,225 @@
+# Turn on auto-discovery: when we keep an item from any domain below,
+# the collector will sniff & add the site's real RSS/Atom feed so recall improves over time.
+include_discovery: true
+max_new_feeds_per_run: 60
+
+# Explicit feeds that are notoriously valuable (podcasts, gov, etc.)
+rss:
+  # Product discovery
+  - https://www.producthunt.com/feed               # Product Hunt main RSS. :contentReference[oaicite:0]{index=0}
+
+  # Analysts / podcasts
+  - https://joshbersin.com/feed/                   # Josh Bersin blog feed. :contentReference[oaicite:1]{index=1}
+  - https://feeds.harvardbusiness.org/harvardbusiness/ideacast  # HBR IdeaCast. :contentReference[oaicite:2]{index=2}
+
+  # Influencers (newsletter)
+  - https://humancloud.substack.com/feed           # Matthew Mottola (Human Cloud). :contentReference[oaicite:3]{index=3}
+
+  # Regulation / policy
+  - https://www.gov.uk/search/news-and-communications.atom      # GOV.UK news & comms feed (covers HMRC, BEIS, etc.). :contentReference[oaicite:4]{index=4}
+  - https://www.consilium.europa.eu/en/rss/pressreleases.ashx   # EU Council press releases. :contentReference[oaicite:5]{index=5}
+
+domains:
+  # ——— FMS platforms (core) ———
+  - worksuite.com
+  - worksome.com
+  - talentdesk.io
+  - yunojuno.com
+  - workmarket.com
+  - shortl.ist         # legacy Shortlist links still surface occasionally
+  - talentdesk.com     # safety catch; some items share this variant
+
+  # ——— Marketplaces / freelance platforms (signals about enterprise moves, feature rollouts) ———
+  - upwork.com
+  - fiverr.com
+  - toptal.com
+  - usebraintrust.com
+  - a.team
+  - contra.com
+  - malt.com
+  - comatch.com
+  - gocatalant.com
+  - expert360.com
+  - talmix.com
+  - outvise.com
+  - gigged.ai
+  - flexingit.com
+  - unicorn.io
+
+  # ——— EOR / Payroll / Global contractor management (compliance & product updates overlap FMS) ———
+  - deel.com
+  - remote.com
+  - oysterhr.com
+  - papayaglobal.com
+  - velocityglobal.com
+  - g-p.com
+  - safeguardsglobal.com
+  - omnipresent.com
+  - pilot.co
+  - atlashxm.com
+  - rippling.com
+  - multiplier.com
+  - boundlesshq.com
+  - teampayroll.com
+  - plane.com             # (Pilot rebrand path shows up as Plane)
+  - remotepad.com         # EOR comparisons & regulatory explainers
+  - shieldgeo.com
+
+  # ——— MSPs / VMS & workforce tech touching external/contingent talent ———
+  - beeline.com
+  - magnitglobal.com
+  - allegisglobalsolutions.com
+  - pontoonsolutions.com
+  - guidantglobal.com
+  - randstadsourceright.com
+  - tapfin.com
+  - prodigysourcing.com
+  - brightfieldts.com
+  - fieldnation.com
+  - sap.com                 # SAP Fieldglass lives here now
+  - workday.com
+  - servicemax.com
+  - servicemarketplace.com
+
+  # ——— Compliance, misclassification, IC programs (AoR/EoR/IC risk) ———
+  - mbopartners.com
+  - cxcglobal.com
+  - independently.ai
+  - enterprise.alexandermannsolutions.com
+  - lawinsider.com
+  - littler.com
+  - osborneclarke.com
+  - eversheds-sutherland.com
+  - fragomen.com
+  - bakermckenzie.com
+  - hfw.com
+  - lewissilkin.com
+
+  # ——— Analysts, research & industry media ———
+  - staffingindustry.com
+  - open-assembly.com
+  - unleash.ai
+  - shrm.org
+  - worktech.com
+  - reworked.co
+  - sloanreview.mit.edu
+  - hbr.org
+  - gartner.com
+  - forrester.com
+  - spendmatters.com
+  - zdnet.com
+  - techcrunch.com
+  - wired.com
+  - theinformation.com
+  - finance.yahoo.com
+  - businesswire.com
+  - prnewswire.com
+  - globenewswire.com
+
+  # ——— Government & policy (IR35 / EU Platform Work / IRS / DOL) ———
+  - gov.uk
+  - legislation.gov.uk
+  - irdigital.blog.gov.uk
+  - icas.com
+  - irs.gov
+  - dol.gov
+  - osha.gov
+  - europa.eu
+  - ec.europa.eu
+  - europarl.europa.eu
+  - consilium.europa.eu
+  - oecd.org
+  - ilo.org
+  - beis.gov.uk
+  - op.europa.eu
+  - hse.gov.uk
+  - ico.org.uk
+
+  # ——— Payments / Finops (contractor pay, cross-border compliance tidbits) ———
+  - wise.com
+  - payoneer.com
+  - stripe.com
+  - adyen.com
+  - checkout.com
+  - revolut.com
+
+  # ——— Event & community hubs (newsletters, conference writeups) ———
+  - staffinghub.com
+  - hrtechconference.com
+  - saastr.com
+  - websummit.com
+  - recfest.com
+  - unleash.ai/events
+
+  # ——— Vendor changelogs & engineering blogs (good for feature signals) ———
+  - dev.to
+  - medium.com
+  - github.blog
+  - producthunt.com
+  - stackshare.io
+
+  # ——— Regional platforms / niche marketplaces (trend signals, APAC, etc.) ———
+  - freelancer.com
+  - peopleperhour.com
+  - guru.com
+  - malt.es
+  - malt.fr
+  - malt.de
+  - malt.it
+  - malt.nl
+  - malt.co.uk
+  - 99designs.com
+  - designcrowd.com
+  - crowdworks.jp
+  - lancers.jp
+  - werkspot.nl
+  - twago.com
+
+  # ——— Finance/analyst houses commenting on FoW & freelancer economics ———
+  - mckinsey.com
+  - bcg.com
+  - accenture.com
+  - deloitte.com
+  - pwc.com
+  - ey.com
+  - kpmg.com
+
+  # ——— General business media (for M&A/funding/integrations) ———
+  - wsj.com
+  - ft.com
+  - bloomberg.com
+  - reuters.com
+  - cnbc.com
+  - theverge.com
+  - protocol.com
+  - venturebeat.com
+  - axios.com
+  - fortune.com
+
+  # Vendor & competitor YouTube channels (product/features, changelogs, demos, exec talks)
+- https://www.youtube.com/feeds/videos.xml?channel_id=UCvxGFOnwUBDHHcxuPqhe4CQ  # Upwork (official)
+- https://www.youtube.com/feeds/videos.xml?channel_id=UCQieDTrc3ZeCPPNoJEFbqaQ  # Fiverr (official)
+- https://www.youtube.com/feeds/videos.xml?channel_id=UCPJsrP8zyttajAybEMQBNgA  # Remote (official)
+- https://www.youtube.com/feeds/videos.xml?channel_id=UCNqm_euTHZz3o5OnKhUS-oA  # Toptal (official)
+- https://www.youtube.com/feeds/videos.xml?channel_id=UCYiK-3h2CuggLuPk27myBkg  # YunoJuno (competitor)
+- https://www.youtube.com/feeds/videos.xml?channel_id=UC-jjSXIt8b_nkBBf60B-xCg  # Deel (official)
+
+# Influencers / analysts (podcasts & newsletters)
+- https://humancloud.substack.com/feed                                          # Matthew Mottola – The Human Cloud (Substack)
+- https://joshbersin.com/feed/podcast/                                         # Josh Bersin Company Podcast (AI & work)
+- https://feeds.harvardbusiness.org/harvardbusiness/ideacast                   # HBR IdeaCast (frequent AI & work adoption series)
+
+# Policy / regulation (for IR35/EU/gig updates)
+- https://www.gov.uk/search/news-and-communications.atom?keywords=IR35         # UK gov IR35 updates
+- https://www.consilium.europa.eu/en/press/press-releases/rss/                 # EU Council press releases (labour & digital)
+
+# YunoJuno engineering blog (often ships/infra notes that hint at platform direction)
+- https://tech.yunojuno.com/rss     
+# (shows “RSS” on site nav)
+
+discovery:
+  expand_from_kept_links: true
+  max_new_sources_per_week: 3
+  require_rss: false
+  min_weeks_to_promote: 2
+
