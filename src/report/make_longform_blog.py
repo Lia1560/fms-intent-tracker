@@ -99,8 +99,7 @@ def write_post(root: Path):
     return out
 
 if __name__ == "__main__":
-    # Fix: use parents[1] (repo root), not parents[2]
-    ROOT = Path(__file__).resolve().parents[2]
+    ROOT = Path(__file__).resolve().parents[1]   # fixed
     print(f"Resolved ROOT = {ROOT}")
     p = write_post(ROOT)
     print(f"Wrote longform blog post: {p}")
