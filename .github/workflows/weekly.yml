@@ -4,9 +4,11 @@ name: FMS Weekly Intent Brief
 
 
 on:
-  workflow_dispatch:     # ✅ this makes the green "Run workflow" button appear
+  workflow_dispatch:    # manual Run button
+  push:
+    branches: [main]    # run on commit to main
   schedule:
-    - cron: "0 11 * * 1" # Mondays 12:00 London (11:00 UTC)
+    - cron: "0 11 * * 1"   # Mondays 12:00 London
 
 
 jobs:
