@@ -43,7 +43,7 @@ jobs:
 
       - name: Pre-download model
         run: |
-          python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"
+          python -c "from sentence_transformers import SentenceTransformer; model = SentenceTransformer('all-MiniLM-L6-v2'); model.encode(['hello world'])"
 
       - name: Run pipeline
         run: |
