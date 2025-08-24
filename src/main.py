@@ -106,10 +106,17 @@ def main():
                 continue
     print(f"New feeds queued: {len(new_feeds)}")
 
-    print(">>> Step 11: Rendering report")
+        print(">>> Step 11: Rendering report")
     today = datetime.utcnow().date().isoformat()
     report_md = render_report(today, sections, top10, emerging, momentum)
-    (REPORT_DIR / f"{today}.md").write_text(report_md, encoding="utf-8")
+
+    if not report_md.strip():
+        report_md = f"# Weekly FMS Brief — {today}\n\n_No items were collected this week._"
+
+    outpath = REPORT_DIR / f"{today}.md"
+    outpath.write_text(report_md, encoding="utf-8")
+    print(f"Wrote report to {outpath}")
+
 
     print(">>> Step 12: Saving data snapshots")
     HIST_PATH.write_text(json.dumps(HIST, indent=2))
