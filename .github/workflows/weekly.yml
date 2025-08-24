@@ -1,3 +1,5 @@
+# trigger reindex after visibility change
+
 name: FMS Weekly Intent Brief
 
 on:
