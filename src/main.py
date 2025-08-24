@@ -20,6 +20,8 @@ from sumy.utils import get_stop_words
 from dateutil import parser as dtparser, tz
 import spacy
 
+print(">>> src.main loaded")   # DEBUG: confirm module loaded
+
 # Global socket timeout
 socket.setdefaulttimeout(int(os.getenv("HTTP_TIMEOUT", "20")))
 
@@ -173,4 +175,17 @@ def extract_terms(text):
         if tt: terms.append(tt)
     return terms
 
-# (rest of your code continues unchanged …)
+# ---- MAIN ----
+def main():
+    print(">>> Entered main()")   # DEBUG: confirm we reach main
+    inc, exc = CFG["intent"]["include"], CFG["intent"]["exclude"]
+    keep_thr = CFG["scoring"]["keep_threshold"]
+
+    print(">>> Step 1: Building feed list")
+    # ... rest of your existing main() body ...
+    # (unchanged, keep all your other debug prints and logic)
+    
+
+if __name__ == "__main__":
+    print(">>> __main__ guard hit")   # DEBUG: confirm execution path
+    main()
