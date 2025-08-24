@@ -39,3 +39,27 @@ jobs:
           path: ~/.cache/huggingface
           key: ${{ runner.os }}-hf-${{ hashFiles('requirements.txt') }}
           restore-keys: |
+            ${{ runner.os }}-hf-
+
+      - name: Run pipeline (retry + timeout)
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 20
+          max_attempts: 2
+          command: python -u -m src.main
+
+      # - name: Build highlight blog (disabled)
+      #   run: |
+      #     python -m src.report.make_blog_post
+
+      - name: Build longform blog (Top 5)
+        run: |
+          python -m src.report.make_longform_blog
+
+      - name: Commit outputs
+        run: |
+          git config user.name "gh-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add reports/*.md reports/*.csv reports/*.json data/history.json data/discovered_sources.yaml docs/_posts/*.md || true
+          git commit -m "Weekly report + blog posts" || echo "Nothing to commit"
+          git push
