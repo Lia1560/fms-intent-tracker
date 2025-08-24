@@ -1,32 +1,15 @@
-# Explicit feeds (podcasts, gov, vendor channels)
-rss:
-  # Product discovery
-  - https://www.producthunt.com/feed
+include_discovery: true
+max_new_feeds_per_run: 60
 
-  # Analysts / blogs / podcasts
-  - https://joshbersin.com/feed
-  - https://joshbersin.com/feed/podcast/
+rss:
+  - https://www.producthunt.com/feed
+  - https://joshbersin.com/feed/
   - https://feeds.harvardbusiness.org/harvardbusiness/ideacast
   - https://humancloud.substack.com/feed
-
-  # Regulation / policy
   - https://www.gov.uk/search/news-and-communications.atom
   - https://www.consilium.europa.eu/en/rss/pressreleases.ashx
 
-  # Vendor & competitor YouTube channels (product/features, changelogs, demos, exec talks)
- # - https://www.youtube.com/feeds/videos.xml?channel_id=UCvxGFOnwUBDHHcxuPqhe4CQ  # Upwork (official)
-  #- https://www.youtube.com/feeds/videos.xml?channel_id=UCQieDTrc3ZeCPPNoJEFbqaQ  # Fiverr (official)
- # - https://www.youtube.com/feeds/videos.xml?channel_id=UCPJsrP8zyttajAybEMQBNgA  # Remote (official)
-  #- https://www.youtube.com/feeds/videos.xml?channel_id=UCNqm_euTHZz3o5OnKhUS-oA  # Toptal (official)
-  #- https://www.youtube.com/feeds/videos.xml?channel_id=UCYiK-3h2CuggLuPk27myBkg  # YunoJuno (competitor)
-  #- https://www.youtube.com/feeds/videos.xml?channel_id=UC-jjSXIt8b_nkBBf60B-xCg  # Deel (official)
-
-  # Vendor engineering blogs
-  - https://tech.yunojuno.com/rss
-
-# Domains to watch for discovery and scraping
 domains:
-  # ——— FMS platforms (core) ———
   - worksuite.com
   - worksome.com
   - talentdesk.io
@@ -34,13 +17,11 @@ domains:
   - workmarket.com
   - shortl.ist
   - talentdesk.com
-
-  # ——— Marketplaces / freelance platforms ———
   - upwork.com
   - fiverr.com
   - toptal.com
   - usebraintrust.com
-  - "a.team"
+  - a.team
   - contra.com
   - malt.com
   - comatch.com
@@ -51,8 +32,6 @@ domains:
   - gigged.ai
   - flexingit.com
   - unicorn.io
-
-  # ——— EOR / Payroll / Global contractor management ———
   - deel.com
   - remote.com
   - oysterhr.com
@@ -70,8 +49,6 @@ domains:
   - plane.com
   - remotepad.com
   - shieldgeo.com
-
-  # ——— MSPs / VMS & workforce tech ———
   - beeline.com
   - magnitglobal.com
   - allegisglobalsolutions.com
@@ -86,8 +63,6 @@ domains:
   - workday.com
   - servicemax.com
   - servicemarketplace.com
-
-  # ——— Compliance / IC programs ———
   - mbopartners.com
   - cxcglobal.com
   - independently.ai
@@ -100,8 +75,6 @@ domains:
   - bakermckenzie.com
   - hfw.com
   - lewissilkin.com
-
-  # ——— Analysts, research & industry media ———
   - staffingindustry.com
   - open-assembly.com
   - unleash.ai
@@ -121,8 +94,6 @@ domains:
   - businesswire.com
   - prnewswire.com
   - globenewswire.com
-
-  # ——— Government & policy ———
   - gov.uk
   - legislation.gov.uk
   - irdigital.blog.gov.uk
@@ -140,48 +111,32 @@ domains:
   - op.europa.eu
   - hse.gov.uk
   - ico.org.uk
-
-  # ——— Payments / Finops ———
   - wise.com
   - payoneer.com
   - stripe.com
   - adyen.com
   - checkout.com
   - revolut.com
-
-  # ——— Event & community hubs ———
   - staffinghub.com
   - hrtechconference.com
   - saastr.com
   - websummit.com
   - recfest.com
   - unleash.ai/events
-
-  # ——— Vendor changelogs & engineering blogs ———
   - dev.to
   - medium.com
   - github.blog
   - producthunt.com
   - stackshare.io
-
-  # ——— Regional / niche marketplaces ———
   - freelancer.com
   - peopleperhour.com
   - guru.com
-  - malt.es
-  - malt.fr
-  - malt.de
-  - malt.it
-  - malt.nl
-  - malt.co.uk
-  - "99designs.com"
+  - 99designs.com
   - designcrowd.com
   - crowdworks.jp
   - lancers.jp
   - werkspot.nl
   - twago.com
-
-  # ——— Finance/analyst houses ———
   - mckinsey.com
   - bcg.com
   - accenture.com
@@ -189,8 +144,6 @@ domains:
   - pwc.com
   - ey.com
   - kpmg.com
-
-  # ——— General business media ———
   - wsj.com
   - ft.com
   - bloomberg.com
@@ -201,10 +154,3 @@ domains:
   - venturebeat.com
   - axios.com
   - fortune.com
-
-# Auto-discovery settings
-discovery:
-  expand_from_kept_links: true
-  max_new_sources_per_week: 10
-  require_rss: false
-  min_weeks_to_promote: 2
