@@ -173,6 +173,129 @@ def extract_terms(text):
         if tt: terms.append(tt)
     return terms
 
+def update_trends(kept, hist, window_weeks, new_min_sources, momentum_jump_pct):
+    today = datetime.utcnow().date().isoformat()
+    term_counts = defaultdict(int)
+    term_sources = defaultdict(set)
+    for it in kept:
+        tset = set(extract_terms(f"{it['title']}. {it['text']}"))
+        for t in tset:
+            term_counts[t] += 1
+            term_sources[t].add(it["domain"])
+    hist.setdefault("terms", {})
+    emerging, momentum = [], []
+    for t,c in term_counts.items():
+        srcs = len(term_sources[t])
+        series = hist["terms"].get(t, [])
+        last = series[-1]["count"] if series else 0
+        series.append({"date": today, "count": int(c), "sources": srcs})
+        if len(series) > window_weeks: series = series[-window_weeks:]
+        hist["terms"][t] = series
+        prev_total = sum(x["count"] for x in series[:-1])
+        if prev_total == 0 and srcs >= new_min_sources and c >= 2:
+            emerging.append({"term": t, "count": int(c), "sources": srcs})
+        elif last > 0:
+            inc = ((c - last) / max(1, last)) * 100
+            if inc >= momentum_jump_pct and c >= 2:
+                momentum.append({"term": t, "count": int(c), "sources": srcs, "pct": round(inc)})
+    emerging.sort(key=lambda x: (-x["count"], -x["sources"], x["term"]))
+    momentum.sort(key=lambda x: (-x["pct"], -x["count"], x["term"]))
+    return emerging[:10], momentum[:10], hist
+
+# ---- Bucketing & impact ----
+def bucket(title, text):
+    t = (title + " " + text[:1200]).lower()
+    if any(w in t for w in CFG["ranking"]["launch_words"]): 
+        return "Product & Feature Signals"
+    if any(w in t for w in CFG["ranking"]["funding_words"]): 
+        return "Strategic Moves"
+    if any(w in t for w in CFG["ranking"]["reg_words"]):     
+        return "Regulation & Risk"
+    if any(n in t for n in ["mottola","jon younger","barry matthews",
+                            "josh bersin","analyst","commentary","opinion"]):
+        return "Influencer & Analyst Commentary"
+    if any(w in t for w in ["ai","automation","apac","low-code","no-code",
+                            "niche","entrepreneurs"]):
+        return "Market & Trend Signals"
+    return "Market & Trend Signals"
+
+def estimate_impact(item, section):
+    score = item["score"]
+    url = item["url"].lower()
+    text = (item["title"] + " " + item["text"][:800]).lower()
+    w = CFG["scoring"]["weights"].get(section, 1.0)
+    if any(d in url for d in CFG["ranking"]["big_vendor_domains"]): score += 0.08
+    if any(wd in text for wd in CFG["ranking"]["funding_words"]): score += 0.07
+    if any(wd in text for wd in CFG["ranking"]["contract_words"]): score += 0.06
+    if any(wd in text for wd in CFG["ranking"]["reg_words"]):     score += 0.06
+    if any(wd in text for wd in CFG["ranking"]["launch_words"]):  score += 0.05
+    score += 0.02 * item.get("cluster_size", 1)
+    s = score * w
+    impact = "High" if s >= 0.55 else "Medium" if s >= 0.42 else "Low"
+    return s, impact
+
+def build_top10(kept, clusters):
+    rows = []
+    for g in clusters:
+        group = [kept[i] for i in g]
+        main = group[0]
+        sec = bucket(main["title"], main["text"])
+        main["cluster_size"] = len(group)
+        s, imp = estimate_impact(main, sec)
+        rows.append({
+            "title": main["title"],
+            "url": main["url"],
+            "section": sec,
+            "score": round(s, 3),
+            "impact": imp,
+            "summary_hint": group[0]["text"][:1400]
+        })
+    rows.sort(key=lambda r: (-r["score"], r["title"]))
+    return rows[:CFG["ranking"]["top_k"]]
+
+# ---- Report rendering ----
+def render_report(today, bullets_by_section, top10, emerging, momentum):
+    out = [f"# Weekly FMS Brief — {today}\n",
+           "## TL;DR\n"]
+    for r in top10[:6]:
+        out.append(f"- **{r['title']}** — {r['impact']} impact. [Source]({r['url']})")
+    if emerging or momentum:
+        out.append("\n## Emerging terms\n")
+        chips = []
+        for e in emerging[:8]: chips.append(f"`{e['term']}` ({e['count']})")
+        if chips: out.append("**New this week:** " + " • ".join(chips))
+        chips = []
+        for m in momentum[:6]: chips.append(f"`{m['term']}` (+{m['pct']}%)")
+        if chips: out.append("**Momentum:** " + " • ".join(chips))
+    out.append("\n## Top 10 News Items\n")
+    for i, r in enumerate(top10, 1):
+        out += [
+            f"**{i}. {r['title']}**",
+            f"{summarize(r['summary_hint'], sentences=2)}",
+            f"**Impact:** {r['impact']} — [Source]({r['url']})",
+            ""
+        ]
+    order = ["Product & Feature Signals","Strategic Moves","Market & Trend Signals",
+             "Regulation & Risk","Influencer & Analyst Commentary","Discovery Highlights"]
+    for sec in order:
+        if bullets_by_section.get(sec):
+            out.append(f"\n## {sec}\n")
+            out += [f"- {b}" for b in bullets_by_section[sec][:CFG["max_items_per_section"]]]
+    return "\n".join(out)
+
+# ---- Discovery bookkeeping ----
+def add_discovery(feed_url, reason):
+    DISC["pending"].setdefault(feed_url, {"weeks":0,"reason":reason})
+
+def promote_discoveries():
+    promoted = []
+    for f, meta in list(DISC.get("pending", {}).items()):
+        if meta.get("weeks",0) >= SRC["discovery"]["min_weeks_to_promote"]:
+            DISC["feeds"][f] = {"added": datetime.utcnow().isoformat(), "reason": meta.get("reason","")}
+            del DISC["pending"][f]
+            promoted.append(f)
+    return promoted
+
 # ---- MAIN ----
 def main():
     print(">>> Entered main()")
