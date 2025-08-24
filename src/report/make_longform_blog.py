@@ -2,7 +2,7 @@ from pathlib import Path
 import re
 from sumy.summarizers.text_rank import TextRankSummarizer
 from sumy.parsers.plaintext import PlaintextParser
-from sumy.nlp.tokenizers import Tokenizer   # correct tokenizer import
+from sumy.nlp.tokenizers import Tokenizer
 from sumy.utils import get_stop_words
 
 def _summ(text, sents=4, lang="english"):
@@ -12,14 +12,17 @@ def _summ(text, sents=4, lang="english"):
     return " ".join(str(s) for s in summ(parser.document, sents))
 
 def _load_latest_report(root: Path):
+    print(">>> [make_longform_blog] Loading latest report")
     reports = sorted((root / "reports").glob("*.md"))
     if not reports:
         raise SystemExit("No report found")
     md = reports[-1].read_text(encoding="utf-8")
     date = reports[-1].stem
+    print(f">>> [make_longform_blog] Found report: {reports[-1]}")
     return date, md
 
 def _parse_top10(md):
+    print(">>> [make_longform_blog] Parsing Top 10 section")
     m = re.search(r"## Top 10 News Items\n(.+?)(?:\n## |\Z)", md, flags=re.S)
     items = []
     if not m:
@@ -35,7 +38,8 @@ def _parse_top10(md):
             impactm = re.search(r"Impact:\s*(\w+)", blocks[k+2])
             impact = impactm.group(1) if impactm else "Medium"
             items.append({"title": title, "desc": desc, "url": link, "impact": impact})
-        except Exception:
+        except Exception as e:
+            print(f">>> [make_longform_blog] Failed to parse block {k}: {e}")
             pass
     return items[:5]
 
@@ -50,7 +54,7 @@ def write_post(root: Path):
         sec_counts[sec] = len(mm.group(1).strip().splitlines()) if mm else 0
     hottest = ", ".join([f"{k} ({v})" for k,v in sorted(sec_counts.items(), key=lambda kv:(-kv[1],kv[0])) if v>0][:3]) or "a quieter mix"
 
-    # Emerging chips (optional)
+    # Emerging chips
     chips = ""
     m1 = re.search(r"\*\*New this week:\*\* (.+)", md); m2 = re.search(r"\*\*Momentum:\*\* (.+)", md)
     if m1 or m2:
@@ -84,8 +88,10 @@ def write_post(root: Path):
     elif words > 820:
         text = " ".join(text.split()[:820])
 
-    outdir = root / "docs" / "_posts"; outdir.mkdir(parents=True, exist_ok=True)
+    outdir = root / "docs" / "_posts"
+    outdir.mkdir(parents=True, exist_ok=True)
     out = outdir / f"{date}-top-discoveries-longform.md"
+    print(f">>> [make_longform_blog] Writing longform post to {out}")
     out.write_text("\n".join([
         "---",
         "layout: post",
@@ -99,7 +105,7 @@ def write_post(root: Path):
     return out
 
 if __name__ == "__main__":
-    ROOT = Path(__file__).resolve().parents[2]   # fixed
-    print(f"Resolved ROOT = {ROOT}")
+    ROOT = Path(__file__).resolve().parents[2]
+    print(f">>> [make_longform_blog] Resolved ROOT = {ROOT}")
     p = write_post(ROOT)
-    print(f"Wrote longform blog post: {p}")
+    print(f">>> [make_longform_blog] Wrote longform blog post: {p}")
