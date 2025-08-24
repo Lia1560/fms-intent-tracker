@@ -57,10 +57,11 @@ def main():
             sw = float(HIST["sources"].get(it["domain"], 0.0))
             s = score_item(f"{it['title']}. {it['text']}", inc, exc, sw)
             it["score"] = s
-            if s >= keep_thr and len(it["text"]) > 300:
-                kept.append(it)
-        except Exception as e:
-            print(f"  scoring failed for {it.get('url')}: {e}")
+            print(f"  {it['domain']} | score={s:.3f} | title={it['title'][:60]}")
+        if s >= keep_thr and len(it["text"]) > 300:
+            kept.append(it)
+    except Exception as e:
+        print(f"  scoring failed for {it.get('url')}: {e}")
     print(f"Kept {len(kept)} items")
 
     # Step 5: Clustering
