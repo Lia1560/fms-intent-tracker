@@ -29,7 +29,7 @@ def sumy_tokenize(text: str):
     return [p.strip() for p in parts if p.strip()]
 
 import os, socket
-socket.setdefaulttimeout(int(os.getenv("HTTP_TIMEOUT", "20")))  # cap each network call at 20s
+socket.setdefaulttimeout(int(os.getenv("HTTP_TIMEOUT", "20")))  
 
 
 ROOT = Path(__file__).resolve().parents[1]
