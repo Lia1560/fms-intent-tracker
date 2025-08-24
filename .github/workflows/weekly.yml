@@ -41,6 +41,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-hf-
 
+      - name: Pre-download model
+        run: |
+          python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"
+
       - name: Run pipeline (retry + timeout)
         uses: nick-fields/retry@v3
         with:
