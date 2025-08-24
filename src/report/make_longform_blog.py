@@ -2,11 +2,10 @@ from pathlib import Path
 import re
 from sumy.summarizers.text_rank import TextRankSummarizer
 from sumy.parsers.plaintext import PlaintextParser
-from sumy.nlp.tokenizers import Tokenizer   # ✅ correct tokenizer import
+from sumy.nlp.tokenizers import Tokenizer   # correct tokenizer import
 from sumy.utils import get_stop_words
 
 def _summ(text, sents=4, lang="english"):
-    # ✅ use Sumy's Tokenizer instead of the missing sumy.nltk_tokenize
     parser = PlaintextParser.from_string(text, Tokenizer(lang))
     summ = TextRankSummarizer()
     summ.stop_words = get_stop_words(lang)
@@ -14,7 +13,8 @@ def _summ(text, sents=4, lang="english"):
 
 def _load_latest_report(root: Path):
     reports = sorted((root / "reports").glob("*.md"))
-    if not reports: raise SystemExit("No report found")
+    if not reports:
+        raise SystemExit("No report found")
     md = reports[-1].read_text(encoding="utf-8")
     date = reports[-1].stem
     return date, md
@@ -22,7 +22,8 @@ def _load_latest_report(root: Path):
 def _parse_top10(md):
     m = re.search(r"## Top 10 News Items\n(.+?)(?:\n## |\Z)", md, flags=re.S)
     items = []
-    if not m: return items
+    if not m:
+        return items
     chunk = m.group(1).strip()
     blocks = [b.strip() for b in chunk.split("\n\n") if b.strip()]
     for k in range(0, len(blocks), 3):
@@ -62,10 +63,13 @@ def write_post(root: Path):
              f"onboard, and manage freelancers at scale.")
     paras.append(intro)
 
-    for item in top:
-        why = "This matters because it touches one of the core FMS capabilities and shifts risk, cost, or speed for enterprise programs."
-        body = _summ(item["desc"], sents=3)
-        paras.append(f"**{item['title']}** — {item['impact']} impact. {body} {why} [Source]({item['url']}).")
+    if top:
+        for item in top:
+            why = "This matters because it touches one of the core FMS capabilities and shifts risk, cost, or speed for enterprise programs."
+            body = _summ(item["desc"], sents=3)
+            paras.append(f"**{item['title']}** — {item['impact']} impact. {body} {why} [Source]({item['url']}).")
+    else:
+        paras.append("_No Top 10 items available this week._")
 
     outro = ("Stepping back, these updates reinforce 2025 themes we’re tracking: "
              "AI-assisted workflows, tighter compliance (IR35/IRS/EU), deeper integrations, "
@@ -83,11 +87,19 @@ def write_post(root: Path):
     outdir = root / "docs" / "_posts"; outdir.mkdir(parents=True, exist_ok=True)
     out = outdir / f"{date}-top-discoveries-longform.md"
     out.write_text("\n".join([
-        "---","layout: post",f'title: "Top 5 — narrative brief — {date}"',f"date: {date}","tags: [longform,fms]","---",text,chips
+        "---",
+        "layout: post",
+        f'title: "Top 5 — narrative brief — {date}"',
+        f"date: {date}",
+        "tags: [longform,fms]",
+        "---",
+        text,
+        chips
     ]), encoding="utf-8")
     return out
 
 if __name__ == "__main__":
-    ROOT = Path(__file__).resolve().parents[2]
+    # Fix: use parents[1] (repo root), not parents[2]
+    ROOT = Path(__file__).resolve().parents[1]
     p = write_post(ROOT)
     print(f"Wrote longform blog post: {p}")
