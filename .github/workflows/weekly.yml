@@ -2,10 +2,12 @@
 
 name: FMS Weekly Intent Brief
 
+
 on:
+  workflow_dispatch:     # ✅ this makes the green "Run workflow" button appear
   schedule:
-    - cron: "0 11 * * 1"   # Mondays 06:05 UTC (morning London)
-  workflow_dispatch: {}
+    - cron: "0 11 * * 1" # Mondays 12:00 London (11:00 UTC)
+
 
 jobs:
   build:
