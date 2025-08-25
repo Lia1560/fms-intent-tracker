@@ -12,3 +12,6 @@ pending:
   https://joshbersin.com/feed/podcast:
     weeks: 0
     reason: seen via joshbersin.com
+  https://www.saastr.com/comments/feed/:
+    weeks: 0
+    reason: seen via saastr.com
