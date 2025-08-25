@@ -3,7 +3,7 @@ max_new_feeds_per_run: 60
 
 discovery:
   expand_from_kept_links: true
-  max_new_sources_per_week: 3
+  max_new_sources_per_week: 5
   min_weeks_to_promote: 2
 
 rss:
