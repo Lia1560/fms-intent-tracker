@@ -407,24 +407,30 @@ def main():
         cap = SRC["discovery"].get("max_new_sources_per_week", 3)
         for it in kept:
             try:
-                res = requests_get(it["url"])
+                res = requests_get(it["url"], timeout=5)   # shorter timeout
                 if not res.ok:
                     continue
                 soup = BeautifulSoup(res.text, "html.parser")
-                for link in soup.find_all("link", {"rel":"alternate"}):
+
+                for link in soup.find_all("link", {"rel": "alternate"}):
                     if "rss" in (link.get("type") or "") or "atom" in (link.get("type") or ""):
                         href = link.get("href")
-                        if href and href.startswith("http") and href not in feeds and href not in DISC.get("feeds", {}) and href not in DISC.get("pending", {}):
-                            fp = feedparser.parse(href)
-                            if fp.bozo == 0 and fp.entries:
-                                add_discovery(href, reason=f"seen via {it['domain']}")
-                                new_feeds.append(href)
-                                if len(new_feeds) >= cap: break
-                if len(new_feeds) >= cap: break
+                        if href and href.startswith("http"):
+                            if href not in feeds and href not in DISC.get("feeds", {}) and href not in DISC.get("pending", {}):
+                                fp = feedparser.parse(href)
+                                if fp.bozo == 0 and fp.entries:
+                                    add_discovery(href, reason=f"seen via {it['domain']}")
+                                    new_feeds.append(href)
+                                    print(f"   discovered new feed: {href}")
+                                    if len(new_feeds) >= cap:
+                                        break
+                if len(new_feeds) >= cap:
+                    break
             except Exception as e:
                 print(f"  discovery failed for {it.get('url')}: {e}")
                 continue
     print(f"New feeds queued: {len(new_feeds)}")
+
 
     # Step 11: Render report
     print(">>> Step 11: Rendering report")
