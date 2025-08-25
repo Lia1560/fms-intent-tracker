@@ -1,15 +1,14 @@
 from pathlib import Path
 import re
-from sumy.summarizers.text_rank import TextRankSummarizer
-from sumy.parsers.plaintext import PlaintextParser
-from sumy.nlp.tokenizers import Tokenizer   # ✅ fixed import
-from sumy.utils import get_stop_words
 
-def _summ(text, sents=4, lang="english"):
-    parser = PlaintextParser.from_string(text, Tokenizer(lang))  # ✅ fixed call
-    summ = TextRankSummarizer()
-    summ.stop_words = get_stop_words(lang)
-    return " ".join(str(s) for s in summ(parser.document, sents))
+# ---- Simple summarizer (no NLTK / sumy) ----
+def _summ(text, sents=4):
+    text = re.sub(r"\s+", " ", text or "").strip()
+    if not text:
+        return ""
+    parts = re.split(r'(?<=[.!?])\s+(?=[A-Z0-9])', text)
+    parts = [p.strip() for p in parts if p.strip()]
+    return " ".join(parts[:sents])
 
 def _load_latest_report(root: Path):
     print(">>> [make_longform_blog] Loading latest report")
@@ -81,8 +80,7 @@ def write_post(root: Path):
     paras.append(outro)
 
     text = "\n\n".join(paras)
-    import re as _re
-    words = len(_re.findall(r"\w+", text))
+    words = len(re.findall(r"\w+", text))
     if words < 600:
         text += "\n\n" + "In short, momentum continues to build across the FMS stack as vendors and buyers align on automation, compliance, and integrated workflows."
     elif words > 820:
