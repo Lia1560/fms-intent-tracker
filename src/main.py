@@ -1,4 +1,4 @@
-import os, json, yaml, csv, re, time, socket
+import os, json, yaml, csv, re, socket
 from pathlib import Path
 from datetime import datetime, timedelta
 from urllib.parse import urlparse
@@ -10,9 +10,7 @@ import trafilatura
 
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
-
 from sentence_transformers import SentenceTransformer, util
-
 from dateutil import parser as dtparser, tz
 import spacy
 
@@ -28,14 +26,15 @@ DISC_PATH = ROOT / "data" / "discovered_sources.yaml"
 REPORT_DIR = ROOT / "reports"; REPORT_DIR.mkdir(parents=True, exist_ok=True)
 DATA_DIR = ROOT / "data"; DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-HIST = json.loads(HIST_PATH.read_text()) if HIST_PATH.exists() else {"terms":{}, "sources":{}}
-DISC = yaml.safe_load(DISC_PATH.read_text()) if DISC_PATH.exists() else {"feeds":{}, "pending":{}}
+HIST = json.loads(HIST_PATH.read_text()) if HIST_PATH.exists() else {"terms": {}, "sources": {}}
+DISC = yaml.safe_load(DISC_PATH.read_text()) if DISC_PATH.exists() else {"feeds": {}, "pending": {}}
 
 # ---- Embeddings model ----
 MODEL = SentenceTransformer("all-MiniLM-L6-v2")
 
 # ---- Basic helpers ----
-def normalize_text(s): return re.sub(r"\s+", " ", (s or "")).strip()
+def normalize_text(s): 
+    return re.sub(r"\s+", " ", (s or "")).strip()
 
 def domain(u):
     try:
@@ -51,11 +50,12 @@ def is_recent(published_str, days=7, tzname="Europe/London"):
         return True
     tzinfo = tz.gettz(tzname)
     now = datetime.now(tzinfo)
-    if dt.tzinfo is None: dt = dt.replace(tzinfo=tzinfo)
+    if dt.tzinfo is None: 
+        dt = dt.replace(tzinfo=tzinfo)
     return (now - dt) <= timedelta(days=days)
 
 def requests_get(url, timeout=12):
-    headers = {"User-Agent":"Mozilla/5.0 (FMS-Intent-Tracker)"}
+    headers = {"User-Agent": "Mozilla/5.0 (FMS-Intent-Tracker)"}
     return requests.get(url, headers=headers, timeout=timeout, allow_redirects=True)
 
 # ---- Finder ----
@@ -64,6 +64,7 @@ COMMON_FEED_PATHS = ["/feed", "/rss", "/rss.xml", "/atom.xml", "/news/rss", "/bl
 def discover_feeds_for_domain(dom):
     found = set()
     try:
+        # 1) Try common paths
         for p in COMMON_FEED_PATHS:
             try:
                 url = f"https://{dom}{p}"
@@ -72,11 +73,12 @@ def discover_feeds_for_domain(dom):
                     found.add(url)
             except Exception:
                 pass
+        # 2) Parse homepage for <link rel="alternate">
         try:
             res = requests_get(f"https://{dom}")
             if res.ok:
                 soup = BeautifulSoup(res.text, "html.parser")
-                for link in soup.find_all("link", {"rel":"alternate"}):
+                for link in soup.find_all("link", {"rel": "alternate"}):
                     if "rss" in (link.get("type") or "") or "atom" in (link.get("type") or ""):
                         href = link.get("href")
                         if href and href.startswith("http"):
@@ -250,8 +252,7 @@ def build_top10(kept, clusters):
 
 # ---- Report rendering ----
 def render_report(today, bullets_by_section, top10, emerging, momentum):
-    out = [f"# Weekly FMS Brief — {today}\n",
-           "## TL;DR\n"]
+    out = [f"# Weekly FMS Brief — {today}\n", "## TL;DR\n"]
     for r in top10[:6]:
         out.append(f"- **{r['title']}** — {r['impact']} impact. [Source]({r['url']})")
     if emerging or momentum:
@@ -284,7 +285,7 @@ def add_discovery(feed_url, reason):
 
 def promote_discoveries():
     promoted = []
-    discovery_cfg = SRC.get("discovery", {})  # safe access
+    discovery_cfg = SRC.get("discovery", {})
     min_weeks = discovery_cfg.get("min_weeks_to_promote", 2)
     for f, meta in list(DISC.get("pending", {}).items()):
         if meta.get("weeks",0) >= min_weeks:
@@ -404,7 +405,7 @@ def main():
     # Step 10: Discovery
     print(">>> Step 10: Discovery from kept links")
     new_feeds = []
-    discovery_cfg = SRC.get("discovery", {})  # safe access
+    discovery_cfg = SRC.get("discovery", {})
     if discovery_cfg.get("expand_from_kept_links", True):
         cap = discovery_cfg.get("max_new_sources_per_week", 3)
         for it in kept:
