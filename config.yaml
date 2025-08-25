@@ -17,11 +17,12 @@ intent:
     Prioritize enterprise-relevant signals with verifiable sources (press releases, analyst reports, vendor blogs).
   exclude: >
     Aviation "flight management system" content;
-    consumer gig/freelancer.com job ads or project postings;
-    generic SaaStr Q&A or advice blogs not tied to FMS;
+    consumer gig/freelancer.com job ads or project postings (Freelancer.com, PeoplePerHour, Guru, 99designs, DesignCrowd, etc.);
+    generic SaaStr Q&A or advice blogs not tied to FMS platforms;
     generic SMB/HR productivity tips without concrete FMS relevance;
-    unrelated engineering/dev updates;
-    marketing fluff or lifestyle content without verifiable claim/source.
+    unrelated engineering/dev updates (dev.to, GitHub.blog, random Medium posts);
+    motivational YouTube content without a verifiable product, feature, or regulatory update;
+    marketing fluff or lifestyle content without a credible enterprise source.
 
 categories:
   - Product & Feature Signals
@@ -32,7 +33,7 @@ categories:
   - Discovery Highlights
 
 scoring:
-  keep_threshold: 0.22    # balanced (0.10 was too low, 0.38 too strict)
+  keep_threshold: 0.22    # balanced (0.10 too low, 0.38 too strict)
   weights:
     Product & Feature Signals: 1.25
     Strategic Moves: 1.20
