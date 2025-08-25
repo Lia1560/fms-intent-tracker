@@ -7,14 +7,34 @@ discovery:
   min_weeks_to_promote: 2
 
 rss:
+  # Product discovery
   - https://www.producthunt.com/feed
+
+  # Analysts / podcasts
   - https://joshbersin.com/feed/
   - https://feeds.harvardbusiness.org/harvardbusiness/ideacast
   - https://humancloud.substack.com/feed
+  - https://joshbersin.com/feed/podcast/              # NEW (Josh Bersin podcast)
+
+  # Regulation / policy
   - https://www.gov.uk/search/news-and-communications.atom
   - https://www.consilium.europa.eu/en/rss/pressreleases.ashx
+  - https://www.gov.uk/search/news-and-communications.atom?keywords=IR35  # NEW (IR35-specific)
+  - https://www.consilium.europa.eu/en/press/press-releases/rss/          # NEW (EU Council variant)
+
+  # Vendor & competitor YouTube channels (NEW)
+  - https://www.youtube.com/feeds/videos.xml?channel_id=UCvxGFOnwUBDHHcxuPqhe4CQ  # Upwork
+  - https://www.youtube.com/feeds/videos.xml?channel_id=UCQieDTrc3ZeCPPNoJEFbqaQ  # Fiverr
+  - https://www.youtube.com/feeds/videos.xml?channel_id=UCPJsrP8zyttajAybEMQBNgA  # Remote
+  - https://www.youtube.com/feeds/videos.xml?channel_id=UCNqm_euTHZz3o5OnKhUS-oA  # Toptal
+  - https://www.youtube.com/feeds/videos.xml?channel_id=UCYiK-3h2CuggLuPk27myBkg  # YunoJuno
+  - https://www.youtube.com/feeds/videos.xml?channel_id=UC-jjSXIt8b_nkBBf60B-xCg  # Deel
+
+  # Vendor engineering blog (NEW)
+  - https://tech.yunojuno.com/rss
 
 domains:
+  # ——— FMS platforms (core) ———
   - worksuite.com
   - worksome.com
   - talentdesk.io
@@ -22,6 +42,8 @@ domains:
   - workmarket.com
   - shortl.ist
   - talentdesk.com
+
+  # ——— Marketplaces / freelance platforms ———
   - upwork.com
   - fiverr.com
   - toptal.com
@@ -37,6 +59,8 @@ domains:
   - gigged.ai
   - flexingit.com
   - unicorn.io
+
+  # ——— EOR / Payroll ———
   - deel.com
   - remote.com
   - oysterhr.com
@@ -54,6 +78,8 @@ domains:
   - plane.com
   - remotepad.com
   - shieldgeo.com
+
+  # ——— MSPs / VMS ———
   - beeline.com
   - magnitglobal.com
   - allegisglobalsolutions.com
@@ -68,6 +94,8 @@ domains:
   - workday.com
   - servicemax.com
   - servicemarketplace.com
+
+  # ——— Compliance, misclassification ———
   - mbopartners.com
   - cxcglobal.com
   - independently.ai
@@ -80,6 +108,8 @@ domains:
   - bakermckenzie.com
   - hfw.com
   - lewissilkin.com
+
+  # ——— Analysts, research & media ———
   - staffingindustry.com
   - open-assembly.com
   - unleash.ai
@@ -99,6 +129,8 @@ domains:
   - businesswire.com
   - prnewswire.com
   - globenewswire.com
+
+  # ——— Government & policy ———
   - gov.uk
   - legislation.gov.uk
   - irdigital.blog.gov.uk
@@ -116,32 +148,48 @@ domains:
   - op.europa.eu
   - hse.gov.uk
   - ico.org.uk
+
+  # ——— Payments / Finops ———
   - wise.com
   - payoneer.com
   - stripe.com
   - adyen.com
   - checkout.com
   - revolut.com
+
+  # ——— Event & community hubs ———
   - staffinghub.com
   - hrtechconference.com
   - saastr.com
   - websummit.com
   - recfest.com
   - unleash.ai/events
+
+  # ——— Vendor changelogs / eng blogs ———
   - dev.to
   - medium.com
   - github.blog
   - producthunt.com
   - stackshare.io
+
+  # ——— Regional platforms / niche marketplaces ———
   - freelancer.com
   - peopleperhour.com
   - guru.com
+  - malt.es
+  - malt.fr
+  - malt.de
+  - malt.it
+  - malt.nl
+  - malt.co.uk
   - 99designs.com
   - designcrowd.com
   - crowdworks.jp
   - lancers.jp
   - werkspot.nl
   - twago.com
+
+  # ——— Finance/analyst houses ———
   - mckinsey.com
   - bcg.com
   - accenture.com
@@ -149,6 +197,8 @@ domains:
   - pwc.com
   - ey.com
   - kpmg.com
+
+  # ——— General business media ———
   - wsj.com
   - ft.com
   - bloomberg.com
