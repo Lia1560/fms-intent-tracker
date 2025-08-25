@@ -1452,16 +1452,17 @@
     ]
   },
  "sources": {
-  "mit.edu": 0.02,
-  "dol.gov": -0.20,
-  "forrester.com": 0.02,
-  "freelancer.com": 0.06,
-  "ilo.org": 0.07,
-  "joshbersin.com": 0.02,
-  "littler.com": 0.09,
-  "mbopartners.com": 0.06,
-  "saastr.com": 0.05,
-  "theverge.com": 0.02,
-  "venturebeat.com": 0.01,
-  "youtube.com": -0.15
+    "mit.edu": 0.02,
+    "dol.gov": -0.20,
+    "forrester.com": 0.02,
+    "freelancer.com": 0.06,
+    "ilo.org": 0.07,
+    "joshbersin.com": 0.02,
+    "littler.com": 0.09,
+    "mbopartners.com": 0.06,
+    "saastr.com": 0.05,
+    "theverge.com": 0.02,
+    "venturebeat.com": 0.01,
+    "youtube.com": -0.15
+  }
 }
