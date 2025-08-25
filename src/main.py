@@ -143,7 +143,6 @@ def summarize(text, sentences=3):
     text = normalize_text(text)
     if not text:
         return ""
-    # Simple regex-based sentence split instead of NLTK punkt
     parts = re.split(r'(?<=[.!?])\s+(?=[A-Z0-9])', text)
     parts = [p.strip() for p in parts if p.strip()]
     return " ".join(parts[:sentences])
@@ -285,8 +284,10 @@ def add_discovery(feed_url, reason):
 
 def promote_discoveries():
     promoted = []
+    discovery_cfg = SRC.get("discovery", {})  # safe access
+    min_weeks = discovery_cfg.get("min_weeks_to_promote", 2)
     for f, meta in list(DISC.get("pending", {}).items()):
-        if meta.get("weeks",0) >= SRC["discovery"]["min_weeks_to_promote"]:
+        if meta.get("weeks",0) >= min_weeks:
             DISC["feeds"][f] = {"added": datetime.utcnow().isoformat(), "reason": meta.get("reason","")}
             del DISC["pending"][f]
             promoted.append(f)
@@ -403,15 +404,15 @@ def main():
     # Step 10: Discovery
     print(">>> Step 10: Discovery from kept links")
     new_feeds = []
-    if SRC.get("discovery", {}).get("expand_from_kept_links", True):
-        cap = SRC["discovery"].get("max_new_sources_per_week", 3)
+    discovery_cfg = SRC.get("discovery", {})  # safe access
+    if discovery_cfg.get("expand_from_kept_links", True):
+        cap = discovery_cfg.get("max_new_sources_per_week", 3)
         for it in kept:
             try:
-                res = requests_get(it["url"], timeout=5)   # shorter timeout
+                res = requests_get(it["url"], timeout=5)
                 if not res.ok:
                     continue
                 soup = BeautifulSoup(res.text, "html.parser")
-
                 for link in soup.find_all("link", {"rel": "alternate"}):
                     if "rss" in (link.get("type") or "") or "atom" in (link.get("type") or ""):
                         href = link.get("href")
@@ -430,7 +431,6 @@ def main():
                 print(f"  discovery failed for {it.get('url')}: {e}")
                 continue
     print(f"New feeds queued: {len(new_feeds)}")
-
 
     # Step 11: Render report
     print(">>> Step 11: Rendering report")
