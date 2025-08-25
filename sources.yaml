@@ -1,6 +1,11 @@
 include_discovery: true
 max_new_feeds_per_run: 60
 
+discovery:
+  expand_from_kept_links: true
+  max_new_sources_per_week: 3
+  min_weeks_to_promote: 2
+
 rss:
   - https://www.producthunt.com/feed
   - https://joshbersin.com/feed/
