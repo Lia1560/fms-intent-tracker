@@ -37,7 +37,14 @@ scoring:
     Discovery Highlights: 0.80
 
 ranking:
-  big_vendor_domains: [ "upwork.com", "fiverr.com", "deel.com", "remote.com", "toptal.com", "accenture.com", "mckinsey.com" ]
+  big_vendor_domains:
+    - upwork.com
+    - fiverr.com
+    - deel.com
+    - remote.com
+    - toptal.com
+    - accenture.com
+    - mckinsey.com
   funding_words: ["seed","series a","series b","series c","raises","funding","invests","acquires","merger","acquisition"]
   contract_words: ["wins contract","awarded","framework","msa","tender","rfp","framework agreement"]
   reg_words: ["ir35","hmrc","irs","directive","eu","compliance","worker classification","indemnity","platform work directive"]
