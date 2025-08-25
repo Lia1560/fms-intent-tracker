@@ -32,13 +32,13 @@ categories:
   - Discovery Highlights
 
 scoring:
-  keep_threshold: 0.38    # tightened filter (was 0.10)
+  keep_threshold: 0.33    # balanced (0.10 was too low, 0.38 too strict)
   weights:
     Product & Feature Signals: 1.20
     Strategic Moves: 1.20
     Market & Trend Signals: 1.00
     Regulation & Risk: 1.10
-    Influencer & Analyst Commentary: 0.90
+    Influencer & Analyst Commentary: 0.85
     Discovery Highlights: 0.70
 
 ranking:
