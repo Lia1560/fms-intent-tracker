@@ -14,15 +14,15 @@ rss:
   - https://joshbersin.com/feed/
   - https://feeds.harvardbusiness.org/harvardbusiness/ideacast
   - https://humancloud.substack.com/feed
-  - https://joshbersin.com/feed/podcast/              # NEW (Josh Bersin podcast)
+  - https://joshbersin.com/feed/podcast/              # Josh Bersin podcast
 
   # Regulation / policy
   - https://www.gov.uk/search/news-and-communications.atom
   - https://www.consilium.europa.eu/en/rss/pressreleases.ashx
-  - https://www.gov.uk/search/news-and-communications.atom?keywords=IR35  # NEW (IR35-specific)
-  - https://www.consilium.europa.eu/en/press/press-releases/rss/          # NEW (EU Council variant)
+  - https://www.gov.uk/search/news-and-communications.atom?keywords=IR35
+  - https://www.consilium.europa.eu/en/press/press-releases/rss/
 
-  # Vendor & competitor YouTube channels (NEW)
+  # Vendor & competitor YouTube channels
   - https://www.youtube.com/feeds/videos.xml?channel_id=UCvxGFOnwUBDHHcxuPqhe4CQ  # Upwork
   - https://www.youtube.com/feeds/videos.xml?channel_id=UCQieDTrc3ZeCPPNoJEFbqaQ  # Fiverr
   - https://www.youtube.com/feeds/videos.xml?channel_id=UCPJsrP8zyttajAybEMQBNgA  # Remote
@@ -30,7 +30,7 @@ rss:
   - https://www.youtube.com/feeds/videos.xml?channel_id=UCYiK-3h2CuggLuPk27myBkg  # YunoJuno
   - https://www.youtube.com/feeds/videos.xml?channel_id=UC-jjSXIt8b_nkBBf60B-xCg  # Deel
 
-  # Vendor engineering blog (NEW)
+  # Vendor engineering blog
   - https://tech.yunojuno.com/rss
 
 domains:
@@ -165,29 +165,17 @@ domains:
   - recfest.com
   - unleash.ai/events
 
-  # ——— Vendor changelogs / eng blogs ———
-  - dev.to
-  - medium.com
-  - github.blog
+  # ——— Vendor changelogs / eng blogs (trimmed) ———
   - producthunt.com
   - stackshare.io
 
-  # ——— Regional platforms / niche marketplaces ———
-  - freelancer.com
-  - peopleperhour.com
-  - guru.com
+  # ——— Regional platforms / niche marketplaces (trimmed) ———
   - malt.es
   - malt.fr
   - malt.de
   - malt.it
   - malt.nl
   - malt.co.uk
-  - 99designs.com
-  - designcrowd.com
-  - crowdworks.jp
-  - lancers.jp
-  - werkspot.nl
-  - twago.com
 
   # ——— Finance/analyst houses ———
   - mckinsey.com
