@@ -12,10 +12,6 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
 from sentence_transformers import SentenceTransformer, util
-from sumy.summarizers.text_rank import TextRankSummarizer
-from sumy.parsers.plaintext import PlaintextParser
-from sumy.nlp.tokenizers import Tokenizer
-from sumy.utils import get_stop_words
 
 from dateutil import parser as dtparser, tz
 import spacy
@@ -145,12 +141,12 @@ def cluster_items(items, sim_thr=0.72):
 # ---- Summarization ----
 def summarize(text, sentences=3):
     text = normalize_text(text)
-    if not text: return ""
-    parser = PlaintextParser.from_string(text, Tokenizer("english"))
-    summ = TextRankSummarizer()
-    summ.stop_words = get_stop_words("english")
-    sents = [str(s) for s in summ(parser.document, sentences)]
-    return " ".join(sents)
+    if not text:
+        return ""
+    # Simple regex-based sentence split instead of NLTK punkt
+    parts = re.split(r'(?<=[.!?])\s+(?=[A-Z0-9])', text)
+    parts = [p.strip() for p in parts if p.strip()]
+    return " ".join(parts[:sentences])
 
 # ---- Trends ----
 NLP = spacy.load("en_core_web_sm", disable=["lemmatizer","textcat","tagger"])
