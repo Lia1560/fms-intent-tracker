@@ -1,2 +1,11 @@
 feeds: {}
-pending: {}
+pending:
+  https://sloanreview.mit.edu/article/accelerating-manufacturing-innovation-at-michelin-with-data-and-ai/feed/:
+    weeks: 0
+    reason: seen via mit.edu
+  https://sloanreview.mit.edu/article/how-to-become-a-critical-reader-of-academic-research/feed/:
+    weeks: 0
+    reason: seen via mit.edu
+  https://joshbersin.com/comments/feed/:
+    weeks: 0
+    reason: seen via joshbersin.com
