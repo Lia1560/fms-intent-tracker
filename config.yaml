@@ -34,10 +34,10 @@ categories:
 scoring:
   keep_threshold: 0.22    # balanced (0.10 was too low, 0.38 too strict)
   weights:
-    Product & Feature Signals: 1.20
+    Product & Feature Signals: 1.25
     Strategic Moves: 1.20
-    Market & Trend Signals: 1.00
-    Regulation & Risk: 1.10
+    Market & Trend Signals: 1.10
+    Regulation & Risk: 0.95
     Influencer & Analyst Commentary: 0.85
     Discovery Highlights: 0.70
 
