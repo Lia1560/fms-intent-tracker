@@ -1153,17 +1153,26 @@
     ]
   },
   "sources": {
-    "mit.edu": 0.02,
-    "dol.gov": 0.04,
-    "forrester.com": 0.02,
-    "freelancer.com": 0.060000000000000005,
-    "ilo.org": 0.07,
+    "mit.edu": 0.00,
+    "dol.gov": 0.00,
+    "forrester.com": 0.00,
+    "freelancer.com": -0.05,
+    "ilo.org": -0.05,
     "joshbersin.com": 0.02,
-    "littler.com": 0.09,
-    "mbopartners.com": 0.060000000000000005,
-    "saastr.com": 0.05,
-    "theverge.com": 0.02,
-    "venturebeat.com": 0.01,
-    "youtube.com": 0.01
+    "littler.com": -0.05,
+    "mbopartners.com": -0.03,
+    "saastr.com": -0.05,
+    "theverge.com": 0.00,
+    "venturebeat.com": 0.00,
+    "youtube.com": 0.02,
+    "upwork.com": 0.05,
+    "deel.com": 0.05,
+    "remote.com": 0.05,
+    "fiverr.com": 0.05,
+    "g-p.com": 0.05,
+    "gov.uk": 0.05,
+    "eversheds-sutherland.com": 0.03,
+    "enterprise-times.co.uk": 0.03,
+    "kingsbridge.co.uk": 0.03
   }
 }
