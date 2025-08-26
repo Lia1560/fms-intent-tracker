@@ -201,31 +201,39 @@ def update_trends(kept, hist, window_weeks, new_min_sources, momentum_jump_pct):
 
 # ---- Bucketing & impact ----
 def bucket(title, text):
+    """Classify item into a section based on stronger cues"""
     t = (title + " " + text[:1200]).lower()
-    if any(w in t for w in CFG["ranking"]["launch_words"]): 
+    # Product: require strong launch cues (not just 'update')
+    if re.search(r"\b(launches|announces|general availability|integration|release notes|changelog|rollout|feature)\b", t):
         return "Product & Feature Signals"
-    if any(w in t for w in CFG["ranking"]["funding_words"]): 
+    if any(w in t for w in CFG["ranking"]["funding_words"]):
         return "Strategic Moves"
-    if any(w in t for w in CFG["ranking"]["reg_words"]):     
+    if any(w in t for w in CFG["ranking"]["reg_words"]):
         return "Regulation & Risk"
-    if any(n in t for n in ["mottola","jon younger","barry matthews",
-                            "josh bersin","analyst","commentary","opinion"]):
+    if any(n in t for n in ["mottola","jon younger","barry matthews","josh bersin","analyst","commentary","opinion"]):
         return "Influencer & Analyst Commentary"
-    if any(w in t for w in ["ai","automation","apac","low-code","no-code",
-                            "niche","entrepreneurs"]):
+    if any(w in t for w in ["ai","automation","apac","low-code","no-code","niche","entrepreneurs","valuation","market growth"]):
         return "Market & Trend Signals"
     return "Market & Trend Signals"
 
 def estimate_impact(item, section):
+   """Estimate weighted score and impact level"""
     score = item["score"]
     url = item["url"].lower()
     text = (item["title"] + " " + item["text"][:800]).lower()
     w = CFG["scoring"]["weights"].get(section, 1.0)
-    if any(d in url for d in CFG["ranking"]["big_vendor_domains"]): score += 0.08
-    if any(wd in text for wd in CFG["ranking"]["funding_words"]): score += 0.07
-    if any(wd in text for wd in CFG["ranking"]["contract_words"]): score += 0.06
-    if any(wd in text for wd in CFG["ranking"]["reg_words"]):     score += 0.06
-    if any(wd in text for wd in CFG["ranking"]["launch_words"]):  score += 0.05
+
+    if any(d in url for d in CFG["ranking"]["big_vendor_domains"]):
+        score += 0.08
+    if any(wd in text for wd in CFG["ranking"]["funding_words"]):
+        score += 0.05  # reduced from 0.07
+    if any(wd in text for wd in CFG["ranking"]["contract_words"]):
+        score += 0.06
+    if any(wd in text for wd in CFG["ranking"]["reg_words"]):
+        score += 0.08  # raised from 0.06
+    if any(wd in text for wd in CFG["ranking"]["launch_words"]):
+        score += 0.08  # raised from 0.05
+
     score += 0.02 * item.get("cluster_size", 1)
     s = score * w
     impact = "High" if s >= 0.55 else "Medium" if s >= 0.42 else "Low"
