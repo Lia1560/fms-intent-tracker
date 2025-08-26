@@ -26,7 +26,10 @@ intent:
     U.S. Department of Labor Unemployment Insurance advisories (UIPL);
     generic freelancer success stories (e.g. "How I made $X on Upwork");
     promotional YouTube content without verifiable feature/compliance update;
-    webinars, training videos, and motivational content not tied to FMS product/regulation.
+    webinars, training videos, and motivational content not tied to FMS product/regulation;
+    Chambers rankings or directory listings;
+    law firm attorney promotions / awards;
+    generic MIT Sloan leadership essays without FMS or vendor relevance.
 
 categories:
   - Product & Feature Signals
@@ -37,7 +40,7 @@ categories:
   - Discovery Highlights
 
 scoring:
-  keep_threshold: 0.22    # balanced (0.10 was too low, 0.38 too strict)
+  keep_threshold: 0.28    # raised slightly to cut noise but keep good signals
   weights:
     Product & Feature Signals: 1.25
     Strategic Moves: 1.20
@@ -60,6 +63,9 @@ ranking:
     - eversheds-sutherland.com
     - staffingindustry.com
     - open-assembly.com
+    - hrtechconference.com       # NEW
+    - unleash.ai                 # NEW
+    - staffinghub.com            # NEW
   funding_words: ["seed","series a","series b","series c","raises","funding","invests","acquires","merger","acquisition","ipo"]
   contract_words: ["wins contract","awarded","framework","msa","tender","rfp","framework agreement","landed client","enterprise deal"]
   reg_words: ["ir35","hmrc","irs","directive","eu","umbrella company","compliance","worker classification","indemnity","platform work directive","legislation","law"]
