@@ -343,20 +343,33 @@ def main():
             it["text"] = normalize_text(it.get("summary", ""))
     print("Fetched article text for all items")
 
-    # Step 4: Score & keep
-    print(">>> Step 4: Scoring items")
-    kept = []
-    for it in items:
-        try:
-            sw = float(HIST["sources"].get(it["domain"], 0.0))
-            s = score_item(f"{it['title']}. {it['text']}", inc, exc, sw)
-            it["score"] = s
-            print(f"  {it['domain']} | score={s:.3f} | title={it['title'][:60]}")
-            if s >= keep_thr and len(it["text"]) > 300:
-                kept.append(it)
-        except Exception as e:
-            print(f"  scoring failed for {it.get('url')}: {e}")
-    print(f"Kept {len(kept)} items")
+   # ---- Step 4: Score & keep ----
+print(">>> Step 4: Scoring items")
+kept = []
+hard_filters = [re.compile(pat) for pat in CFG.get("hard_filters", [])]
+
+for it in items:
+    try:
+        text_block = f"{it['title']}. {it['text']}"
+        # --- Hard filter check ---
+        if any(p.search(text_block) for p in hard_filters):
+            print(f"  FILTERED (hard) {it['domain']} | title={it['title'][:60]}")
+            continue
+
+        # --- Normal scoring ---
+        sw = float(HIST["sources"].get(it["domain"], 0.0))
+        s = score_item(text_block, inc, exc, sw)
+        it["score"] = s
+        print(f"  {it['domain']} | score={s:.3f} | title={it['title'][:60]}")
+
+        if s >= keep_thr and len(it["text"]) > 300:
+            kept.append(it)
+
+    except Exception as e:
+        print(f"  scoring failed for {it.get('url')}: {e}")
+
+print(f"Kept {len(kept)} items")
+
 
     # Step 5: Clustering
     print(">>> Step 5: Clustering kept items")
