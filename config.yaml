@@ -26,10 +26,27 @@ intent:
     U.S. Department of Labor Unemployment Insurance advisories (UIPL);
     generic freelancer success stories (e.g. "How I made $X on Upwork");
     promotional YouTube content without verifiable feature/compliance update;
-    webinars, training videos, and motivational content not tied to FMS product/regulation;
-    Chambers rankings or directory listings;
-    law firm attorney promotions / awards;
-    generic MIT Sloan leadership essays without FMS or vendor relevance.
+    webinars, training videos, and motivational content not tied to FMS product/regulation.
+
+hard_filters:
+  - "(?i)uipl"
+  - "(?i)unemployment insurance"
+  - "(?i)state workforce agenc(y|ies)"
+  - "(?i)chambers latin america"
+  - "(?i)band ?1"
+  - "(?i)best lawyer(s)?"
+  - "(?i)lawyer(s)? of the year"
+  - "(?i)award(-| )winning attorney"
+  - "(?i)legal ranking(s)?"
+  - "(?i)mit sloan management review"
+  - "(?i)mindful leadership"
+  - "(?i)career coaching"
+  - "(?i)life advice"
+  - "(?i)success stor(y|ies)"
+  - "(?i)webinar(s)?"
+  - "(?i)training video(s)?"
+  - "(?i)motivational"
+  - "(?i)ebook(s)?"
 
 categories:
   - Product & Feature Signals
@@ -40,7 +57,7 @@ categories:
   - Discovery Highlights
 
 scoring:
-  keep_threshold: 0.28    # raised slightly to cut noise but keep good signals
+  keep_threshold: 0.22    # balanced (0.10 was too low, 0.38 too strict)
   weights:
     Product & Feature Signals: 1.25
     Strategic Moves: 1.20
@@ -63,9 +80,6 @@ ranking:
     - eversheds-sutherland.com
     - staffingindustry.com
     - open-assembly.com
-    - hrtechconference.com       # NEW
-    - unleash.ai                 # NEW
-    - staffinghub.com            # NEW
   funding_words: ["seed","series a","series b","series c","raises","funding","invests","acquires","merger","acquisition","ipo"]
   contract_words: ["wins contract","awarded","framework","msa","tender","rfp","framework agreement","landed client","enterprise deal"]
   reg_words: ["ir35","hmrc","irs","directive","eu","umbrella company","compliance","worker classification","indemnity","platform work directive","legislation","law"]
