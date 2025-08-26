@@ -33,7 +33,7 @@ DISC = yaml.safe_load(DISC_PATH.read_text()) if DISC_PATH.exists() else {"feeds"
 MODEL = SentenceTransformer("all-MiniLM-L6-v2")
 
 # ---- Basic helpers ----
-def normalize_text(s): 
+def normalize_text(s):
     return re.sub(r"\s+", " ", (s or "")).strip()
 
 def domain(u):
@@ -50,7 +50,7 @@ def is_recent(published_str, days=7, tzname="Europe/London"):
         return True
     tzinfo = tz.gettz(tzname)
     now = datetime.now(tzinfo)
-    if dt.tzinfo is None: 
+    if dt.tzinfo is None:
         dt = dt.replace(tzinfo=tzinfo)
     return (now - dt) <= timedelta(days=days)
 
@@ -126,13 +126,15 @@ def score_item(text, inc, exc, source_weight=0.0):
 # ---- Clustering ----
 def cluster_items(items, sim_thr=0.72):
     texts = [f"{it['title']}. {it['text'][:2000]}" for it in items]
-    if not texts: return []
+    if not texts:
+        return []
     embs = embed(texts)
     sim = cosine_similarity(embs)
     clusters, used = [], set()
     n = len(items)
     for i in range(n):
-        if i in used: continue
+        if i in used:
+            continue
         group = [i]
         for j in range(i+1, n):
             if sim[i,j] >= sim_thr:
@@ -155,7 +157,8 @@ NLP.max_length = 2_000_000
 SAFE_ENTS = {"ORG","PRODUCT","GPE","NORP","EVENT","WORK_OF_ART"}
 
 def extract_terms(text):
-    if not text: return []
+    if not text:
+        return []
     doc = NLP(text[:10000])
     ents = [e.text for e in doc.ents if e.label_ in SAFE_ENTS and 2 <= len(e.text) <= 60]
     chunks = [ch.text for ch in doc.noun_chunks if len(ch.text) >= 3]
@@ -164,10 +167,11 @@ def extract_terms(text):
     for t in raw:
         tt = re.sub(r"[\s\-–—]+", " ", t).strip()
         tt = re.sub(r"[^\w\s&/\.]", "", tt).lower()
-        if not tt or tt.isdigit() or len(tt) < 3: 
+        if not tt or tt.isdigit() or len(tt) < 3:
             continue
         tt = re.sub(r"\b(inc|ltd|plc|corp|co|company|group)\b\.?$", "", tt).strip()
-        if tt: terms.append(tt)
+        if tt:
+            terms.append(tt)
     return terms
 
 def update_trends(kept, hist, window_weeks, new_min_sources, momentum_jump_pct):
@@ -186,7 +190,8 @@ def update_trends(kept, hist, window_weeks, new_min_sources, momentum_jump_pct):
         series = hist["terms"].get(t, [])
         last = series[-1]["count"] if series else 0
         series.append({"date": today, "count": int(c), "sources": srcs})
-        if len(series) > window_weeks: series = series[-window_weeks:]
+        if len(series) > window_weeks:
+            series = series[-window_weeks:]
         hist["terms"][t] = series
         prev_total = sum(x["count"] for x in series[:-1])
         if prev_total == 0 and srcs >= new_min_sources and c >= 2:
@@ -203,7 +208,6 @@ def update_trends(kept, hist, window_weeks, new_min_sources, momentum_jump_pct):
 def bucket(title, text):
     """Classify item into a section based on stronger cues"""
     t = (title + " " + text[:1200]).lower()
-    # Product: require strong launch cues (not just 'update')
     if re.search(r"\b(launches|announces|general availability|integration|release notes|changelog|rollout|feature)\b", t):
         return "Product & Feature Signals"
     if any(w in t for w in CFG["ranking"]["funding_words"]):
@@ -217,7 +221,7 @@ def bucket(title, text):
     return "Market & Trend Signals"
 
 def estimate_impact(item, section):
-   """Estimate weighted score and impact level"""
+    """Estimate weighted score and impact level"""
     score = item["score"]
     url = item["url"].lower()
     text = (item["title"] + " " + item["text"][:800]).lower()
@@ -226,13 +230,13 @@ def estimate_impact(item, section):
     if any(d in url for d in CFG["ranking"]["big_vendor_domains"]):
         score += 0.08
     if any(wd in text for wd in CFG["ranking"]["funding_words"]):
-        score += 0.05  # reduced from 0.07
+        score += 0.05
     if any(wd in text for wd in CFG["ranking"]["contract_words"]):
         score += 0.06
     if any(wd in text for wd in CFG["ranking"]["reg_words"]):
-        score += 0.08  # raised from 0.06
+        score += 0.08
     if any(wd in text for wd in CFG["ranking"]["launch_words"]):
-        score += 0.08  # raised from 0.05
+        score += 0.08
 
     score += 0.02 * item.get("cluster_size", 1)
     s = score * w
