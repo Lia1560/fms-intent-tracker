@@ -1360,6 +1360,11 @@
         "date": "2025-08-25",
         "count": 1,
         "sources": 1
+      },
+      {
+        "date": "2025-08-26",
+        "count": 1,
+        "sources": 1
       }
     ],
     "mbo partners": [
@@ -1381,6 +1386,11 @@
       {
         "date": "2025-08-25",
         "count": 3,
+        "sources": 1
+      },
+      {
+        "date": "2025-08-26",
+        "count": 4,
         "sources": 1
       }
     ],
@@ -1749,7 +1759,7 @@
     "joshbersin.com": 0.02,
     "littler.com": 0.1,
     "mbopartners.com": 0.1,
-    "saastr.com": 0.08,
+    "saastr.com": 0.09,
     "theverge.com": 0.02,
     "venturebeat.com": 0.01,
     "youtube.com": -0.15

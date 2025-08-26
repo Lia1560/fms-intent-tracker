@@ -15,3 +15,6 @@ pending:
   https://www.saastr.com/comments/feed/:
     weeks: 0
     reason: seen via saastr.com
+  https://www.saastr.com/feed/:
+    weeks: 0
+    reason: seen via saastr.com
