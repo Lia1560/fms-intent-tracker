@@ -19,14 +19,15 @@ intent:
   exclude: >
     Aviation "flight management system" content;
     consumer gig/freelancer.com job ads or project postings;
-    generic SaaStr Q&A or advice blogs not tied to FMS;
-    generic SMB/HR productivity tips without concrete FMS relevance;
+    generic SaaStr Q&A or advice blogs not tied to FMS (e.g. comp packages, founder tips);
+    generic SMB/HR productivity or career advice blogs without concrete FMS vendor or analyst tie;
     unrelated engineering/dev updates;
-    marketing fluff or lifestyle content without verifiable claim/source;
+    marketing fluff or lifestyle content without verifiable product/compliance/regulation claim;
     U.S. Department of Labor Unemployment Insurance advisories (UIPL);
     generic freelancer success stories (e.g. "How I made $X on Upwork");
-    promotional YouTube content without verifiable feature/compliance update;
-    webinars, training videos, and motivational content not tied to FMS product/regulation.
+    promotional YouTube videos without verifiable product, compliance, or regulatory update;
+    webinars, training videos, motivational/ebook content not tied to FMS product or regulation;
+    MBO Partners “independent workforce trends” blog posts unless announcing regulation/product/compliance.
 
 hard_filters:
   - "(?i)uipl"
@@ -47,6 +48,8 @@ hard_filters:
   - "(?i)training video(s)?"
   - "(?i)motivational"
   - "(?i)ebook(s)?"
+  - "(?i)mbopartners\.com/blog"
+  - "(?i)saastr\.com"
 
 categories:
   - Product & Feature Signals
@@ -57,12 +60,12 @@ categories:
   - Discovery Highlights
 
 scoring:
-  keep_threshold: 0.22    # balanced (0.10 was too low, 0.38 too strict)
+  keep_threshold: 0.28    # raised from 0.22 for less noise
   weights:
     Product & Feature Signals: 1.25
     Strategic Moves: 1.20
     Market & Trend Signals: 1.10
-    Regulation & Risk: 0.95
+    Regulation & Risk: 1.20
     Influencer & Analyst Commentary: 0.85
     Discovery Highlights: 0.70
 
@@ -83,7 +86,7 @@ ranking:
   funding_words: ["seed","series a","series b","series c","raises","funding","invests","acquires","merger","acquisition","ipo"]
   contract_words: ["wins contract","awarded","framework","msa","tender","rfp","framework agreement","landed client","enterprise deal"]
   reg_words: ["ir35","hmrc","irs","directive","eu","umbrella company","compliance","worker classification","indemnity","platform work directive","legislation","law"]
-  launch_words: ["launches","announces","release notes","general availability","integration","changelog","update","rollout","feature","AI-powered"]
+  launch_words: ["launches","announces","release notes","general availability","integration","changelog","rollout","feature","AI-powered"]
   top_k: 10
 
 trends:
