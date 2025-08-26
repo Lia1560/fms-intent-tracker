@@ -30,26 +30,26 @@ intent:
     MBO Partners “independent workforce trends” blog posts unless announcing regulation/product/compliance.
 
 hard_filters:
-  - "(?i)uipl"
-  - "(?i)unemployment insurance"
-  - "(?i)state workforce agenc(y|ies)"
-  - "(?i)chambers latin america"
-  - "(?i)band ?1"
-  - "(?i)best lawyer(s)?"
-  - "(?i)lawyer(s)? of the year"
-  - "(?i)award(-| )winning attorney"
-  - "(?i)legal ranking(s)?"
-  - "(?i)mit sloan management review"
-  - "(?i)mindful leadership"
-  - "(?i)career coaching"
-  - "(?i)life advice"
-  - "(?i)success stor(y|ies)"
-  - "(?i)webinar(s)?"
-  - "(?i)training video(s)?"
-  - "(?i)motivational"
-  - "(?i)ebook(s)?"
-  - "(?i)mbopartners\.com/blog"
-  - "(?i)saastr\.com"
+  - '(?i)uipl'
+  - '(?i)unemployment insurance'
+  - '(?i)state workforce agenc(y|ies)'
+  - '(?i)chambers latin america'
+  - '(?i)band ?1'
+  - '(?i)best lawyer(s)?'
+  - '(?i)lawyer(s)? of the year'
+  - '(?i)award(-| )winning attorney'
+  - '(?i)legal ranking(s)?'
+  - '(?i)mit sloan management review'
+  - '(?i)mindful leadership'
+  - '(?i)career coaching'
+  - '(?i)life advice'
+  - '(?i)success stor(y|ies)'
+  - '(?i)webinar(s)?'
+  - '(?i)training video(s)?'
+  - '(?i)motivational'
+  - '(?i)ebook(s)?'
+  - '(?i)mbopartners.com/blog'
+  - '(?i)saastr.com'
 
 categories:
   - Product & Feature Signals
