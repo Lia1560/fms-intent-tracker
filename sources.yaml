@@ -7,22 +7,58 @@ discovery:
   min_weeks_to_promote: 2
 
 rss:
-  # Product discovery
-  - https://www.producthunt.com/feed
+  # --- Core FMS / freelance platforms ---
+  - https://www.deel.com/rss.xml
+  - https://remote.com/blog/rss.xml
+  - https://www.upwork.com/press/rss
+  - https://blog.fiverr.com/feed/
+  - https://www.toptal.com/blog.rss
+  - https://www.honeybook.com/blog/feed
+  - https://yunojuno.com/feed
+  - https://worksuite.com/feed
+  - https://blog.worksome.com/feed
+  - https://www.papayaglobal.com/feed/
+  - https://oysterhr.com/blog/rss
+  - https://www.malt.com/blog/feed
+  - https://contra.com/blog/feed
+  - https://blog.usebraintrust.com/rss/
+  - https://build.a.team/feed
+  - https://gocatalant.com/feed
+  - https://expert360.com/feed
+  - https://www.talmix.com/feed
+  - https://gigged.ai/feed
 
-  # Analysts / podcasts
+  # --- EOR / payroll / contractor management ---
+  - https://velocityglobal.com/feed/
+  - https://www.g-p.com/feed/
+  - https://www.omnipresent.com/blog/rss.xml
+  - https://www.usemultiplier.com/blog/rss
+  - https://boundlesshq.com/feed
+  - https://plane.com/blog/rss
+  - https://shieldgeo.com/feed
+
+  # --- Workforce tech / VMS ---
+  - https://www.beeline.com/feed/
+  - https://magnitglobal.com/feed/
+  - https://www.guidantglobal.com/rss.xml
+  - https://www.randstadsourceright.com/rss.xml
+  - https://blog.workday.com/feed
+  - https://news.sap.com/feed/
+
+  # --- Analysts / influencers / podcasts ---
+  - https://staffingindustry.com/feed/
   - https://joshbersin.com/feed/
-  - https://feeds.harvardbusiness.org/harvardbusiness/ideacast
+  - https://open-assembly.com/feed/
   - https://humancloud.substack.com/feed
-  - https://joshbersin.com/feed/podcast/              # Josh Bersin podcast
+  - https://feeds.harvardbusiness.org/harvardbusiness/ideacast
+  - https://joshbersin.com/feed/podcast/   # Josh Bersin podcast
 
-  # Regulation / policy
-  - https://www.gov.uk/search/news-and-communications.atom
-  - https://www.consilium.europa.eu/en/rss/pressreleases.ashx
+  # --- Regulation / policy ---
   - https://www.gov.uk/search/news-and-communications.atom?keywords=IR35
   - https://www.consilium.europa.eu/en/press/press-releases/rss/
+  - https://www.irs.gov/newsroom/rss-feed
 
-  # Vendor & competitor YouTube channels
+  # --- Vendor YouTube channels (product demos, changelogs) ---
   - https://www.youtube.com/feeds/videos.xml?channel_id=UCvxGFOnwUBDHHcxuPqhe4CQ  # Upwork
   - https://www.youtube.com/feeds/videos.xml?channel_id=UCQieDTrc3ZeCPPNoJEFbqaQ  # Fiverr
   - https://www.youtube.com/feeds/videos.xml?channel_id=UCPJsrP8zyttajAybEMQBNgA  # Remote
@@ -30,11 +66,11 @@ rss:
   - https://www.youtube.com/feeds/videos.xml?channel_id=UCYiK-3h2CuggLuPk27myBkg  # YunoJuno
   - https://www.youtube.com/feeds/videos.xml?channel_id=UC-jjSXIt8b_nkBBf60B-xCg  # Deel
 
-  # Vendor engineering blog
+  # --- Vendor engineering blogs ---
   - https://tech.yunojuno.com/rss
 
 domains:
-  # ——— FMS platforms (core) ———
+  # keep your existing domain list as-is (already comprehensive)
   - worksuite.com
   - worksome.com
   - talentdesk.io
@@ -42,8 +78,6 @@ domains:
   - workmarket.com
   - shortl.ist
   - talentdesk.com
-
-  # ——— Marketplaces / freelance platforms ———
   - upwork.com
   - fiverr.com
   - toptal.com
@@ -59,8 +93,6 @@ domains:
   - gigged.ai
   - flexingit.com
   - unicorn.io
-
-  # ——— EOR / Payroll ———
   - deel.com
   - remote.com
   - oysterhr.com
@@ -78,8 +110,6 @@ domains:
   - plane.com
   - remotepad.com
   - shieldgeo.com
-
-  # ——— MSPs / VMS ———
   - beeline.com
   - magnitglobal.com
   - allegisglobalsolutions.com
@@ -94,8 +124,6 @@ domains:
   - workday.com
   - servicemax.com
   - servicemarketplace.com
-
-  # ——— Compliance, misclassification ———
   - mbopartners.com
   - cxcglobal.com
   - independently.ai
@@ -106,8 +134,6 @@ domains:
   - fragomen.com
   - bakermckenzie.com
   - lewissilkin.com
-
-  # ——— Analysts, research & media ———
   - staffingindustry.com
   - open-assembly.com
   - unleash.ai
@@ -127,8 +153,6 @@ domains:
   - businesswire.com
   - prnewswire.com
   - globenewswire.com
-
-  # ——— Government & policy ———
   - gov.uk
   - legislation.gov.uk
   - irdigital.blog.gov.uk
@@ -146,36 +170,26 @@ domains:
   - op.europa.eu
   - hse.gov.uk
   - ico.org.uk
-
-  # ——— Payments / Finops ———
   - wise.com
   - payoneer.com
   - stripe.com
   - adyen.com
   - checkout.com
   - revolut.com
-
-  # ——— Event & community hubs ———
   - staffinghub.com
   - hrtechconference.com
   - saastr.com
   - websummit.com
   - recfest.com
   - unleash.ai/events
-
-  # ——— Vendor changelogs / eng blogs (trimmed) ———
   - producthunt.com
   - stackshare.io
-
-  # ——— Regional platforms / niche marketplaces (trimmed) ———
   - malt.es
   - malt.fr
   - malt.de
   - malt.it
   - malt.nl
   - malt.co.uk
-
-  # ——— Finance/analyst houses ———
   - mckinsey.com
   - bcg.com
   - accenture.com
@@ -183,8 +197,6 @@ domains:
   - pwc.com
   - ey.com
   - kpmg.com
-
-  # ——— General business media ———
   - wsj.com
   - ft.com
   - bloomberg.com
