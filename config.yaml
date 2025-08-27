@@ -60,7 +60,7 @@ categories:
   - Discovery Highlights
 
 scoring:
-  keep_threshold: 0.28    # raised from 0.22 for less noise
+  keep_threshold: 0.26    # raised from 0.22 for less noise
   weights:
     Product & Feature Signals: 1.25
     Strategic Moves: 1.20
