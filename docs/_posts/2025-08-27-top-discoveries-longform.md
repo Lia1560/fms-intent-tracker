@@ -11,4 +11,3 @@ _No Top 10 items available this week._
 Stepping back, these updates reinforce 2025 themes we’re tracking: AI-assisted workflows, tighter compliance (IR35/IRS/EU), deeper integrations, and the rise of niche platforms serving specific talent communities.
 
 In short, momentum continues to build across the FMS stack as vendors and buyers align on automation, compliance, and integrated workflows.
-<p><em>New:</em>   <em>Momentum:</em> `mbo partners` (+100%)</p>
