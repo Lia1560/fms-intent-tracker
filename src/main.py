@@ -93,15 +93,21 @@ def discover_feeds_for_domain(dom):
 
 # ---- Feed fetch ----
 def fetch_feed(url):
-    feed = feedparser.parse(url)
-    for e in feed.entries:
-        yield {
-            "title": e.get("title") or "",
-            "url": e.get("link") or "",
-            "summary": BeautifulSoup(e.get("summary",""), "html.parser").get_text()[:1000],
-            "published": e.get("published") or e.get("updated") or "",
-            "feed": url
-        }
+    try:
+        feed = feedparser.parse(url)
+        count = len(feed.entries)
+        print(f"     [feed] {url} → {count} entries")
+        for e in feed.entries:
+            yield {
+                "title": e.get("title") or "",
+                "url": e.get("link") or "",
+                "summary": BeautifulSoup(e.get("summary",""), "html.parser").get_text()[:1000],
+                "published": e.get("published") or e.get("updated") or "",
+                "feed": url
+            }
+    except Exception as e:
+        print(f"     [feed ERROR] {url} → {e}")
+        return []
 
 # ---- Reader ----
 def extract_main(url, fallback=""):
