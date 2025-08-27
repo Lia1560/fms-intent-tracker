@@ -227,21 +227,25 @@ def estimate_impact(item, section):
     text = (item["title"] + " " + item["text"][:800]).lower()
     w = CFG["scoring"]["weights"].get(section, 1.0)
 
+    # Stronger boosts for enterprise-relevant items
     if any(d in url for d in CFG["ranking"]["big_vendor_domains"]):
-        score += 0.08
+        score += 0.12   # was 0.08
     if any(wd in text for wd in CFG["ranking"]["funding_words"]):
-        score += 0.05
+        score += 0.05   # reduced to avoid noise
     if any(wd in text for wd in CFG["ranking"]["contract_words"]):
-        score += 0.06
+        score += 0.07   # was 0.06
     if any(wd in text for wd in CFG["ranking"]["reg_words"]):
-        score += 0.08
+        score += 0.10   # was 0.08
     if any(wd in text for wd in CFG["ranking"]["launch_words"]):
-        score += 0.08
+        score += 0.10   # was 0.08
 
+    # Reward clusters (multi-source validation)
     score += 0.02 * item.get("cluster_size", 1)
+
     s = score * w
     impact = "High" if s >= 0.55 else "Medium" if s >= 0.42 else "Low"
     return s, impact
+
 
 def build_top10(kept, clusters):
     rows = []
