@@ -1365,6 +1365,11 @@
         "date": "2025-08-26",
         "count": 1,
         "sources": 1
+      },
+      {
+        "date": "2025-08-27",
+        "count": 1,
+        "sources": 1
       }
     ],
     "mbo partners": [
@@ -1396,6 +1401,11 @@
       {
         "date": "2025-08-26",
         "count": 1,
+        "sources": 1
+      },
+      {
+        "date": "2025-08-27",
+        "count": 2,
         "sources": 1
       }
     ],
