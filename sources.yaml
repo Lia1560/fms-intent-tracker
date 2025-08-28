@@ -68,7 +68,82 @@ rss:
 
   # --- Vendor engineering blogs ---
   - https://tech.yunojuno.com/rss
+  
+pages:
+  - https://answers.fiverr.com/tags/ai
+  - https://community.fiverr.com/public/collections/performance-and-growth-2025-05-08
+  - https://community.fiverr.com/public/collections/freelancers-in-the-news-2025-05-09
+  - https://blog.workday.com/en-us/technology-innovation.html?media-type.name=reset
+  - https://blog.workday.com/en-us/analytics-and-insights.html
+  - https://blog.workday.com/en-us/application-development.html
+  - https://blog.workday.com/en-us/artificial-intelligence.html
+  - https://blog.workday.com/en-us/contract-management.html
+  - https://blog.workday.com/en-us/customers-and-community.html
+  - https://blog.workday.com/en-us/human-resources.html
+  - https://blog.workday.com/en-us/medium-enterprise.html
+  - https://blog.workday.com/en-us/procurement.html
+  - https://blog.workday.com/en-us/security-and-trust.html
+  - https://blog.workday.com/en-us/workday-news-and-culture.html
+  - https://www.usebraintrust.com/blog
+  - https://www.usebraintrust.com/press
+  - https://www.worksome.com/press
+  - https://www.worksome.com/blog
+  - https://www.a.team/solutions
+  - https://www.a.team/case-studies
+  - https://contra.com/?view=projects
+  - https://contra.com/?view=people
+  - https://expert360.com/resources?page-vz99=5&page-v37l=3#Articles
+  - https://www.harvardbusiness.org/insight/tag/article/
+  - https://humancloud.substack.com/
+  - https://magnitglobal.com/us/en/resources/knowledge-center/blog.html
+  - https://magnitglobal.com/us/en/resources/product-tours.html
+  - https://magnitglobal.com/us/en/resources/knowledge-center/client-success-stories.html
+  - https://www.open-assembly.com/podcasts
+  - https://www.open-assembly.com/publications
+  - https://oysterhr.com/category/hiring-contractors
+  - https://oysterhr.com/category/legal
+  - https://oysterhr.com/category/%20global-payroll-and-benefits
+  - https://oysterhr.com/case-studies
+  - https://plane.com/blog
+  - https://plane.com/blog/category/news-updates
+  - https://velocityglobal.com/resources/blog/
+  - https://velocityglobal.com/resources/case-study/
+  - https://www.staffingindustry.com/research/latest-emea-research
+  - https://www.staffingindustry.com/editorial/latest-editorial
+  - https://worksuite.com/resources/insights
+  - https://worksuite.com/platform/contingent-workforce-management
+  - https://www.beeline.com/resources
+  - https://www.consilium.europa.eu/en/press/press-releases/
+  - https://www.deel.com/blog/
+  - https://www.deel.com/case-studies/
+  - https://www.guidantglobal.com/news
+  - https://www.guidantglobal.com/news/gated-content/guides
+  - https://www.guidantglobal.com/news/success-story/case-study
+  - https://www.guidantglobal.com/solutions
+  - https://www.irs.gov/newsroom/news-releases-for-current-month
+  - https://www.malt.uk/resources/articles
+  - https://www.malt.uk/resources/success-stories
+  - https://www.omnipresent.com/articles
+  - https://www.omnipresent.com/case-studies
+  - https://www.papayaglobal.com/in-the-media/
+  - https://www.papayaglobal.com/blog/
+  - https://www.papayaglobal.com/features-page/
+  - https://www.papayaglobal.com/competitor-comparison/
+  - https://www.randstadenterprise.com/insights/recruitment-process-outsourcing-rpo/
+  - https://www.randstadenterprise.com/insights/talent-trends/
+  - https://www.randstadenterprise.com/insights/talent-mobility/
+  - https://www.randstadenterprise.com/insights/talent-marketing/
+  - https://www.randstadenterprise.com/insights/workforce-agility/
+  - https://www.randstadenterprise.com/insights/global-talent-shortage/
+  - https://www.randstadenterprise.com/insights/technology-and-innovation/
+  - https://www.randstadenterprise.com/insights/talent-intelligence/
+  - https://www.high5hire.com/blog
+  - https://www.high5hire.com/case-studies
+  - https://www.upwork.com/updates/summer-2025
+  - https://www.upwork.com/blog
+  - https://www.upwork.com/research
 
+  
 domains:
   # keep your existing domain list as-is (already comprehensive)
   - worksuite.com
