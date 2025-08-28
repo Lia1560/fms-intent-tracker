@@ -108,6 +108,37 @@ def fetch_feed(url):
     except Exception as e:
         print(f"     [feed ERROR] {url} → {e}")
         return []
+# ---- Page crawler ----
+def extract_links_from_page(page_url, max_links=30):
+    try:
+        res = requests_get(page_url)
+        if not res.ok:
+            return []
+        soup = BeautifulSoup(res.text, "html.parser")
+        links = []
+        base_dom = domain(page_url)
+        for a in soup.find_all("a", href=True):
+            href = a["href"]
+            # Make absolute
+            if href.startswith("/"):
+                href = f"https://{base_dom}{href}"
+            if not href.startswith("http"):
+                continue
+            # Same domain only
+            if domain(href) != base_dom:
+                continue
+            # Skip obvious junk
+            if any(x in href for x in ["/login","/signup","/privacy","/terms"]):
+                continue
+            text = normalize_text(a.get_text())
+            if not text:
+                continue
+            links.append({"title": text, "url": href, "summary": "", "published": ""})
+            if len(links) >= max_links:
+                break
+        return links
+    except Exception:
+        return []
 
 # ---- Reader ----
 def extract_main(url, fallback=""):
@@ -353,6 +384,21 @@ def main():
             print(f"  feed failed: {feed} ({e})")
             continue
     print(f"Collected {len(items)} raw items")
+
+    # Step 2b: Collect items from pages
+    print(">>> Step 2b: Collecting page items")
+    for page in SRC.get("pages", []):
+        print(f"   crawling page: {page}")
+        try:
+            page_items = extract_links_from_page(page)
+            for it in page_items:
+                it["domain"] = domain(it["url"])
+                items.append(it)
+        except Exception as e:
+            print(f"  page failed: {page} ({e})")
+            continue
+    print(f"Total items (feeds + pages): {len(items)}")
+
 
     # Step 3: Fetch article text
     print(">>> Step 3: Fetching article text")
