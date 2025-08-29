@@ -1357,11 +1357,6 @@
         "sources": 1
       },
       {
-        "date": "2025-08-25",
-        "count": 1,
-        "sources": 1
-      },
-      {
         "date": "2025-08-26",
         "count": 1,
         "sources": 1
@@ -1380,14 +1375,14 @@
         "date": "2025-08-28",
         "count": 1,
         "sources": 1
+      },
+      {
+        "date": "2025-08-29",
+        "count": 1,
+        "sources": 1
       }
     ],
     "mbo partners": [
-      {
-        "date": "2025-08-25",
-        "count": 3,
-        "sources": 1
-      },
       {
         "date": "2025-08-25",
         "count": 3,
@@ -1420,6 +1415,11 @@
       },
       {
         "date": "2025-08-28",
+        "count": 2,
+        "sources": 1
+      },
+      {
+        "date": "2025-08-29",
         "count": 2,
         "sources": 1
       }
@@ -1789,7 +1789,7 @@
     "joshbersin.com": 0.02,
     "littler.com": 0.1,
     "mbopartners.com": 0.1,
-    "saastr.com": 0.09999999999999999,
+    "saastr.com": 0.1,
     "theverge.com": 0.02,
     "venturebeat.com": 0.01,
     "youtube.com": -0.15
