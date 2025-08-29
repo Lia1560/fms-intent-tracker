@@ -419,22 +419,26 @@ def main():
     for it in items:
         try:
             text_block = f"{it['title']}. {it['text']}"
+
             # --- Hard filter check ---
             if any(p.search(text_block) for p in hard_filters):
-                print(f"  FILTERED (hard) {it['domain']} | title={it['title'][:60]}")
+                print(f"  FILTERED (hard) {it['domain']:20} | title={it['title'][:60]}")
                 continue
 
             # --- Normal scoring ---
             sw = float(HIST["sources"].get(it["domain"], 0.0))
             s = score_item(text_block, inc, exc, sw)
             it["score"] = s
-            print(f"  {it['domain']} | score={s:.3f} | title={it['title'][:60]}")
 
-            if s >= keep_thr and len(it["text"]) > 300:
+            decision = "KEPT" if s >= keep_thr and len(it["text"]) > 300 else "SKIPPED"
+            print(f"  {it['domain']:20} | score={s:.3f} | {decision} | title={it['title'][:60]}")
+
+            if decision == "KEPT":
                 kept.append(it)
 
         except Exception as e:
             print(f"  scoring failed for {it.get('url')}: {e}")
+
 
     print(f"Kept {len(kept)} items")
 
