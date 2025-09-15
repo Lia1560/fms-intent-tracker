@@ -1384,11 +1384,6 @@
     ],
     "mbo partners": [
       {
-        "date": "2025-08-25",
-        "count": 3,
-        "sources": 1
-      },
-      {
         "date": "2025-08-26",
         "count": 4,
         "sources": 1
@@ -1421,6 +1416,11 @@
       {
         "date": "2025-09-01",
         "count": 2,
+        "sources": 1
+      },
+      {
+        "date": "2025-09-15",
+        "count": 1,
         "sources": 1
       }
     ],
@@ -1778,6 +1778,62 @@
         "count": 1,
         "sources": 1
       }
+    ],
+    "labour inspectionthe swedish work environment authority": [
+      {
+        "date": "2025-09-15",
+        "count": 1,
+        "sources": 1
+      }
+    ],
+    "the inspection department": [
+      {
+        "date": "2025-09-15",
+        "count": 1,
+        "sources": 1
+      }
+    ],
+    "sweden": [
+      {
+        "date": "2025-09-15",
+        "count": 1,
+        "sources": 1
+      }
+    ],
+    "workthe ministry of employment": [
+      {
+        "date": "2025-09-15",
+        "count": 1,
+        "sources": 1
+      }
+    ],
+    "the ministry of labour": [
+      {
+        "date": "2025-09-15",
+        "count": 1,
+        "sources": 1
+      }
+    ],
+    "swea": [
+      {
+        "date": "2025-09-15",
+        "count": 1,
+        "sources": 1
+      }
+    ],
+    "departments": [
+      {
+        "date": "2025-09-15",
+        "count": 1,
+        "sources": 1
+      }
+    ],
+    "mckinsey": [
+      {
+        "date": "2025-09-15",
+        "count": 1,
+        "sources": 1
+      }
     ]
   },
   "sources": {
@@ -1785,7 +1841,7 @@
     "dol.gov": -0.2,
     "forrester.com": 0.02,
     "freelancer.com": 0.06,
-    "ilo.org": 0.09999999999999999,
+    "ilo.org": 0.1,
     "joshbersin.com": 0.02,
     "littler.com": 0.1,
     "mbopartners.com": 0.1,
